@@ -39,9 +39,11 @@ void ModuleSceneIntro::Walls() {
 	AddWall(17, 2, -106, 5, 2);
 	AddWall(50, 2, -138, 30, 0);
 	AddWall(50, 2, -102, 30, 0);
-	AddWall(84, 2, -134, 5, 2);
+	AddWall(84, 2, -134, 51, 2);
 	AddWall(84, 2, -106, 5, -2);
+	AddWall(93, 2, -101, 10, 2);
 
-
+	AddWall(99, 2, -83, 10, 1);
+	AddWall(115, 2, -83, 10, 1);
 
 }
