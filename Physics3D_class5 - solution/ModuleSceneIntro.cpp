@@ -68,16 +68,16 @@ void ModuleSceneIntro::CreateMap() {
 	btScalar mass = 0;
 	btVector3 fallInertia(0, 0, 0);
 
-	/*
+	
 	btCollisionShape* wall = new btBoxShape(btVector3({ 20,3,0.5 }));
 	wall->calculateLocalInertia(mass, fallInertia);
 	btDefaultMotionState* fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(0, 1, 0, 1), btVector3(15, 2, 48)));
+		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, 1), btVector3(15, 0, 48)));
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, wall, fallInertia);
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	App->physics->world->addRigidBody(fallRigidBody);
 
-	
+	/*
 	//btCollisionShape* wall2 = new btBoxShape(btVector3({ 20,3,0.5 }));
 	//wall->calculateLocalInertia(mass, fallInertia);
 	btDefaultMotionState* fallMotionState2 =
