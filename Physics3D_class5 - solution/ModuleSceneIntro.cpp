@@ -87,11 +87,52 @@ void ModuleSceneIntro::CreateMap() {
 	App->physics->world->addRigidBody(fallRigidBody2);
 	*/
 
-	AddWall(10, 2, 30, 50, 1);
+	
+
+	AddWall(10, 2, 30, 50, 1);	
+	AddWall(5, 2, 87, 10, -2);
+	AddWall(-86, 2, 93, 90, 0);
+	//AddWall(-40, 2, 87, 10, 2);
+	AddWall(-45, 2, 40, 25, 1);
+	AddWall(-51, 2, 8, 10, 2);
+	AddWall(-62, 2, 8, 10, -2);
+	AddWall(-68, 2, 40, 25, 1);
+	AddWall(-57, 2, 65, 12, 0);
+	
+	int i = 85;
+	AddWall(-45 - i, 2, 40, 25, 1);
+	AddWall(-51 - i, 2, 8, 10, 2);
+	AddWall(-62 - i, 2, 8, 10, -2);
+	AddWall(-68 - i, 2, 40, 25, 1);
+	AddWall(-57 - i, 2, 65, 12, 0);
+
+
 	AddWall(-10, 2, 20, 40, 1);
-	AddWall(5, 2, 67, 10, -2);
-	//AddWall(-17, 2, 67, 10, -2);
-	//AddWall(5, 2, 45, 10, -2);
+	AddWall(-15, 2, 64, 7, -2);
+	AddWall(-23, 2, 64, 7, 2);
+	AddWall(-27, 2, 29, 30, 1);
+	AddWall(-33, 2, -9, 10, 2);
+	AddWall(-60, 2, -17, 20, 0);
+	AddWall(-87, 2, -9, 10, -2);
+	AddWall(-93, 2, 29, 30, 1);
+
+	i = 82;
+	AddWall(-15 - i, 2, 64, 7, -2);
+	AddWall(-23 - i, 2, 64, 7, 2);
+	AddWall(-27 -i, 2, 29, 30, 1);
+	AddWall(-33 - i, 2, -9, 10, 2);
+	AddWall(-60 - i, 2, -17, 20, 0);
+	AddWall(-87 - i, 2, -9, 10, -2);
+	AddWall(-93 - i, 2, 29, 30, 1);
+
+	///Obstacles
+	AddWall(-20, 2, 86, 7, 1);
+	AddWall(-60, 2, 72, 7, 1);
+	AddWall(-80, 2, 86, 7, 1);
+	AddWall(-101, 2, 74, 5, 1);
+	AddWall(-140, 2, 86, 7, 1);
+
+	
 	//AddWall(5, 2, 45, 10, -2);
 
 
