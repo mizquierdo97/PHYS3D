@@ -87,9 +87,15 @@ void ModuleSceneIntro::CreateMap() {
 	App->physics->world->addRigidBody(fallRigidBody2);
 	*/
 
-	AddWall(15, 2, 48, 20, 1);
-	AddWall(-15, 2, 48, 20, 1);
+	AddWall(10, 2, 30, 50, 1);
+	AddWall(-10, 2, 20, 40, 1);
+	AddWall(5, 2, 67, 10, -2);
+	//AddWall(-17, 2, 67, 10, -2);
+	//AddWall(5, 2, 45, 10, -2);
+	//AddWall(5, 2, 45, 10, -2);
 
+
+	//////
 	Walls();
 
 
