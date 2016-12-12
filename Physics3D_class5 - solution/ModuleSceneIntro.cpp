@@ -90,6 +90,8 @@ void ModuleSceneIntro::CreateMap() {
 	AddWall(15, 2, 48, 20, 1);
 	AddWall(-15, 2, 48, 20, 1);
 
+	Walls();
+
 
 
 }

@@ -25,6 +25,7 @@ public:
 
 	void AddWall(int x, int y, int z, btScalar width, int rot);
 
+	void Walls();
 public:
 	/*
 	PhysBody3D* pb_snake[MAX_SNAKE];
