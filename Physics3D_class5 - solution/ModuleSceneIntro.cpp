@@ -105,7 +105,7 @@ void ModuleSceneIntro::AddWall(int x,int y ,int z ,btScalar width, int rotation)
 	btCollisionShape* wall = new btBoxShape(btVector3({ width,3,0.5 }));
 	wall->calculateLocalInertia(mass, fallInertia);
 	btDefaultMotionState* fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(0, -2, 0, 1), btVector3(x, y, z)));
+		new btDefaultMotionState(btTransform(btQuaternion(0, rotation, 0, 1), btVector3(x, y, z)));
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, wall, fallInertia);
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	App->physics->world->addRigidBody(fallRigidBody);
