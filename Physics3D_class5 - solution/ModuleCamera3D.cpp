@@ -54,7 +54,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Look(Position, m.translation(), true);
 
 		// Correct height
-		Position.y = m[13] + 15;
+		Position.y = m[13] + 10;
 		//Position.y = (14.9*Position.y + Position.y + following_height) / 16.0;
 
 		// Correct distance

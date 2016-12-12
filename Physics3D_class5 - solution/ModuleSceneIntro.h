@@ -3,7 +3,7 @@
 #include "p2DynArray.h"
 #include "Globals.h"
 #include "Primitive.h"
-
+#include "Bullet\include\LinearMath\btScalar.h"
 #define MAX_SNAKE 2
 
 struct PhysBody3D;
@@ -20,6 +20,10 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
+
+	void CreateMap();
+
+	void AddWall(int x, int y, int z, btScalar width, int rot);
 
 public:
 	/*
