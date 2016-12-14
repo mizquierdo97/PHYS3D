@@ -29,10 +29,14 @@ public:
 	void CreateMap();
 	
 	void AddWall(int x, int y, int z, btScalar width, float rot);
-	void AddWallP(int, int, int, int, float rotation);
+	
 
 	void Walls();
+
+	void Render();
 public:
+
+	p2DynArray<Cube> walls_vector;
 	/*
 	PhysBody3D* pb_snake[MAX_SNAKE];
 	Sphere s_snake[MAX_SNAKE];

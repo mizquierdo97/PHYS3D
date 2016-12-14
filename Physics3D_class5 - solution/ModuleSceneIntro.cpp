@@ -176,7 +176,12 @@ void ModuleSceneIntro::CreateMap() {
 }
 
 
-void ModuleSceneIntro::AddWall(int x,int y ,int z ,btScalar width, float rotation) {
+
+
+void ModuleSceneIntro::AddWall(int x, int y, int z, btScalar width, float rotation) {
+
+
+
 	btScalar mass = 0;
 	btVector3 fallInertia(0, 0, 0);
 
@@ -190,28 +195,26 @@ void ModuleSceneIntro::AddWall(int x,int y ,int z ,btScalar width, float rotatio
 	App->physics->world->addRigidBody(fallRigidBody);
 
 
+
+	Cube r_wall(width, 3, 0.5);
+	fallRigidBody->getWorldTransform().getOpenGLMatrix(&r_wall.transform);
+	btQuaternion q = fallRigidBody->getWorldTransform().getRotation();
+	btVector3 offset(1, 1, 1);
+	offset = offset.rotate(q.getAxis(), q.getAngle());
+
+	r_wall.transform.M[12] += offset.getX();
+	r_wall.transform.M[13] += offset.getY();
+	r_wall.transform.M[14] += offset.getZ();
+
+
+	walls_vector.PushBack(r_wall);
+
 }
 
-void ModuleSceneIntro::AddWallP(int x_first, int y_first,int x_second,int y_second, float rotation)
-{
-	btScalar mass = 0;
-	btVector3 fallInertia(0, 0, 0);
+void ModuleSceneIntro::Render() {
 
-	float l_x = x_second - x_first;
-	float l_y = y_second - y_first;
-	float length = sqrt(l_x*l_x + l_y*l_y)/2;
-
-	p2Point<float> pos;
-	pos.x = (x_first + l_x)/2;
-	pos.y = (y_first+ l_y)/2;
-
-	btCollisionShape* wall = new btBoxShape(btVector3({ length,3,0.5 }));
-	wall->calculateLocalInertia(mass, fallInertia);
-	btDefaultMotionState* fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(0, rotation, 0, 1), btVector3(pos.x, 0, pos.y)));
-	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, wall, fallInertia);
-	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
-	App->physics->world->addRigidBody(fallRigidBody);
-
-
+	auto temp = walls_vector[0];
+	for (int i = 0; i < walls_vector.Count(); i++) {
+		walls_vector[i].Render();
+	}
 }
