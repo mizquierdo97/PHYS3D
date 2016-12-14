@@ -68,7 +68,8 @@ void ModuleSceneIntro::CreateMap() {
 	btScalar mass = 0;
 	btVector3 fallInertia(0, 0, 0);
 
-	
+	// -- RAMPA --
+
 	btCollisionShape* wall = new btBoxShape(btVector3({ 20,3,0.5 }));
 	wall->calculateLocalInertia(mass, fallInertia);
 	btDefaultMotionState* fallMotionState =
@@ -99,20 +100,27 @@ void ModuleSceneIntro::CreateMap() {
 	AddWall(-284, 2, 55, 10, -0.2);
 	AddWall(-300, 2, 44, 10, -0.4);
 
-	
-
-
 	AddWall(-255, 2, 83, 50, 0);
 	AddWall(-316, 2, 78, 13, -0.2);
-	AddWall(-336, 2, 65, 13, -0.4);
-	//AddWall(-191, 2, 85, 10, -1.7);
+	AddWall(-336, 2, 65, 17, -0.4);
 
+
+	// -----------------------------//
+	//CURVA RARA
 	AddWall(-226, 2, 115, 13, 0.3);
 	AddWall(-243, 2, 122, 7, 0);
-	AddWall(-256, 2, 115, 7, 2);
-	AddWall(-236, 2, 120, 13, 0);
+	AddWall(-254, 2, 117, 7, 2);
+	AddWall(-258, 2, 105, 7, 1);
+	//END CURVA RARA
 
+	AddWall(-277, 2, 105, 7, 1);
+	AddWall(-286, 2, 123, 15, -2);
+	AddWall(-308, 2, 135, 13, 0);
+	AddWall(-334, 2, 95, 43, 1.4);
 
+	// -----------------------------//
+
+	
 	AddWall(-200, 2, 145, 13, 0.7);
 	
 	AddWall(-45, 2, 40, 25, 1);
@@ -157,14 +165,14 @@ void ModuleSceneIntro::CreateMap() {
 	
 	
 	
-	//AddWall(5, 2, 45, 10, -2);
+	
 
 	
+
+
 	//////
 	Walls();
-
-
-
+	
 }
 
 

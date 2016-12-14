@@ -8,6 +8,10 @@
 
 void ModuleSceneIntro::Walls() {
 
+	//BACK FIRST WALL
+	AddWall(0, 2, -20, 15, 0);
+	// --------
+
 	AddWall(-220, 2, -60, 10, 1);
 	AddWall(-200, 2, -60, 10, 1);
 
@@ -79,4 +83,12 @@ void ModuleSceneIntro::Walls() {
 	AddWall(190, 2, -45, 20, 2);
 	AddWall(200, 2, 5, 40, 1);
 	AddWall(173, 2, 80, 55, -2);
+
+	//--------------------------//
+
+			//END
+	AddWall(113, 2, 210, 40, 1);
+	AddWall(140, 2, 210, 40, 1);
+
+
 }
