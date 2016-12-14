@@ -99,11 +99,17 @@ public:
 #endif
 
   /**@brief Return the x value */
-		SIMD_FORCE_INLINE const btScalar& getX() const { return m_floats[0]; }
+		SIMD_FORCE_INLINE const btScalar& getX() const { 
+			return m_floats[0];
+		}
   /**@brief Return the y value */
-		SIMD_FORCE_INLINE const btScalar& getY() const { return m_floats[1]; }
+		SIMD_FORCE_INLINE const btScalar& getY() const { 
+			return m_floats[1]; 
+		}
   /**@brief Return the z value */
-		SIMD_FORCE_INLINE const btScalar& getZ() const { return m_floats[2]; }
+		SIMD_FORCE_INLINE const btScalar& getZ() const {
+			return m_floats[2]; 
+		}
   /**@brief Set the x value */
 		SIMD_FORCE_INLINE void	setX(btScalar _x) { m_floats[0] = _x;};
   /**@brief Set the y value */

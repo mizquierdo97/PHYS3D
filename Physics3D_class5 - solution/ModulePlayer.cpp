@@ -119,9 +119,9 @@ update_status ModulePlayer::Update(float dt)
 
 	btTransform tr;
 	tr.setIdentity();
-	btQuaternion quat;
+	btQuaternion quat = { 0,0,0,0 };
 	tr = vehicle->vehicle->getChassisWorldTransform();
-	static float rot = 0;
+	static float rot = quat.getX();
 	btQuaternion quattemp;
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -136,26 +136,40 @@ update_status ModulePlayer::Update(float dt)
 		
 	}
 	
-	quattemp = tr.getRotation();
-	int x;
-	x = quattemp.getX();
-	int y;
-	y = quattemp.getY();
-	int z;
-	z = quattemp.getZ();
+	quat = tr.getRotation();
+	float x;
+	x = quat.getX();
+	float y;
+	y = quat.getY();
+	float z;
+	z = quat.getZ();
 
-
+	/*if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
+		rot = x;
+	*/
+	/*
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		if(turn > -TURN_DEGREES)
 			turn -= TURN_DEGREES;
 
-		rot -= 0.05;
-		quat.setEuler(x + rot,y,z);
+
+		rot -= 0.1;
+		quat.setEuler(rot, 0, 0);
 		tr.setRotation(quat);
 		vehicle->body->setCenterOfMassTransform(tr);
-	}
+		
+		rot -=0.005;
+		quat.setEuler(x + rot ,y ,z );		
+		tr.setRotation(quat);
+		
+		
 
+		vehicle->body->setCenterOfMassTransform(tr);
+	}
+		
+	*/
+	
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{

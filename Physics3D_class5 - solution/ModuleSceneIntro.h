@@ -4,11 +4,16 @@
 #include "Globals.h"
 #include "Primitive.h"
 #include "Bullet\include\LinearMath\btScalar.h"
+#include "p2Point.h"
 #define MAX_SNAKE 2
 
 struct PhysBody3D;
 struct PhysMotor3D;
 
+struct point {
+	int x, z;
+
+};
 class ModuleSceneIntro : public Module
 {
 public:
@@ -22,8 +27,9 @@ public:
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
 	void CreateMap();
-
-	void AddWall(int x, int y, int z, btScalar width, int rot);
+	
+	void AddWall(int x, int y, int z, btScalar width, float rot);
+	void AddWallP(int, int, int, int, float rotation);
 
 	void Walls();
 public:

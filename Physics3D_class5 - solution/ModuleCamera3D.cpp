@@ -99,7 +99,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	////
-	
+	/*
 	if (following != NULL)
 	{
 		mat4x4 m;
@@ -127,7 +127,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 	//
 	
-	
+	*/
 
 
 	//vec3 newPos(0,0,0);
