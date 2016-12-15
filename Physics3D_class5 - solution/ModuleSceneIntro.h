@@ -60,5 +60,6 @@ public:
 	Cube plane;
 	//btCollisionShape* fallShape;
 
-	Sphere s;
+	Cube s;
+	PhysBody3D* sensor;
 };
