@@ -29,9 +29,7 @@ bool ModuleSceneIntro::Start()
 	sensor = App->physics->AddBody(s, 0.0f);
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
-	App->player->vehicle->SetAsSensor(true);
-	App->player->vehicle->collision_listeners.add(this);
-
+	
 	plane.SetPos(0, -1, 0);
 	plane.Scale(1000, 1, 1000);
 	plane.color = MyColor2;
@@ -100,7 +98,9 @@ void ModuleSceneIntro::CreateMap() {
 	App->physics->world->addRigidBody(fallRigidBody2);
 	*/
 
-	
+	//START BACK WALL
+	AddWall(0, 2, -20, 12, 0);
+
 
 	AddWall(10, 2, 30, 50, 1);	
 	AddWall(5, 2, 87, 10, -2);
@@ -110,11 +110,11 @@ void ModuleSceneIntro::CreateMap() {
 	AddWall(-196, 2, 79, 10, 0.2);
 	AddWall(-225, 2, 59, 50, 0);
 	AddWall(-284, 2, 55, 10, -0.2);
-	AddWall(-300, 2, 44, 10, -0.4);
+	AddWall(-309, 2, 35, 25, -0.4);
 
 	AddWall(-255, 2, 83, 50, 0);
 	AddWall(-316, 2, 78, 13, -0.2);
-	AddWall(-336, 2, 65, 17, -0.4);
+	AddWall(-337, 2, 61, 19, -0.5);
 
 
 	// -----------------------------//
@@ -129,11 +129,62 @@ void ModuleSceneIntro::CreateMap() {
 	AddWall(-286, 2, 123, 15, -2);
 	AddWall(-308, 2, 135, 13, 0);
 	AddWall(-334, 2, 95, 43, 1.4);
+		
+	AddWall(-210, 2, 135, 15, -2);
+	AddWall(-240, 2, 148, 30, 0.1);
+	AddWall(-297, 2, 153, 30, 0);
+	AddWall(-334, 2, 143, 15, 2);
+	AddWall(-354, 2, 99, 43, 1.4);
+	AddWall(-367, 2, 45, 20, 1);
+
+	AddWall(-348, 2, 45,10, 1);
+
+	AddWall(-363, 2, 20, 20, 0.8);
+	AddWall(-327, 2, 13, 5, -1);
+	AddWall(-325, 2, 4, 5, 0.7);
+	AddWall(-351, 2, -8, 15, -2.2);
+
+	AddWall(-341, 2, -43, 25, 1);
+	AddWall(-304, 2, -1, 20, 0);
+
+	AddWall(-276, 2, 20, 16, 1);
+	AddWall(-280, 2, 2, 5, 3.4);
+
+	AddWall(-256, 2, 20, 16, 1);
+	AddWall(-256, 2, -20, 25, 1);
+	AddWall(-253, 2, -48, 5, -2);
+	AddWall(-218, 2, -52, 32, 0);
+	AddWall(-218, 2, -67, 32, 0);
+	AddWall(-186, 2, -60, 11, 1);
+	AddWall(-253, 2, -71, 5, 2);
+	AddWall(-285, 2, -75, 30, 0);
+
+	AddWall(-317, 2, -79, 5, 2);
+	AddWall(-341, 2, -82, 16, 1);
+	AddWall(-320, 2, -90, 8, 1);
+
+	// ROTONDA
+	AddWall(-278, 2, -40, 15, 1);
+	AddWall(-318, 2, -40, 15, 1);
+
+	AddWall(-281, 2, -22, 5, -2);
+	AddWall(-315, 2, -22, 5, 2);
+
+	AddWall(-281, 2, -58, 5, 2);
+	AddWall(-315, 2, -58, 5, -2);
+
+	AddWall(-298, 2, -18, 15, 0);
+	AddWall(-298, 2, -62, 15, 0);
+	// END ROTONDA
+
+	//FIXING i & k
+
+	AddWall(-325, 2, -150, 38, -1.5);
+	AddWall(-305, 2, -150, 38, -1.5);
+
+
 
 	// -----------------------------//
-
-	
-	AddWall(-200, 2, 145, 13, 0.7);
 	
 	AddWall(-45, 2, 40, 25, 1);
 	AddWall(-51, 2, 8, 10, 2);
