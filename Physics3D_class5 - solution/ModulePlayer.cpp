@@ -147,13 +147,13 @@ update_status ModulePlayer::Update(float dt)
 	/*if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 		rot = x;
 	*/
-	/*
+	
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
 		if(turn > -TURN_DEGREES)
 			turn -= TURN_DEGREES;
 
-
+/*
 		rot -= 0.1;
 		quat.setEuler(rot, 0, 0);
 		tr.setRotation(quat);
@@ -165,10 +165,10 @@ update_status ModulePlayer::Update(float dt)
 		
 		
 
-		vehicle->body->setCenterOfMassTransform(tr);
+		vehicle->body->setCenterOfMassTransform(tr);*/
 	}
 		
-	*/
+	
 	
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)

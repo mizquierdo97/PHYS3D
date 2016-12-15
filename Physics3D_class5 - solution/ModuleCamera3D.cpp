@@ -99,7 +99,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	////
-	/*
+	
 	if (following != NULL)
 	{
 		mat4x4 m;
@@ -108,7 +108,7 @@ update_status ModuleCamera3D::Update(float dt)
 		Look(Position, m.translation(), true);
 
 		// Correct height
-		Position.y = m[13] + 10;
+		Position.y = m[13] + 7;
 		//Position.y = (14.9*Position.y + Position.y + following_height) / 16.0;
 
 		// Correct distance
@@ -127,7 +127,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 	//
 	
-	*/
+	
 
 
 	//vec3 newPos(0,0,0);

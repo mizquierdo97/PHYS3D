@@ -57,6 +57,7 @@ public:
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
 
+	Cube plane;
 	//btCollisionShape* fallShape;
 
 	Sphere s;

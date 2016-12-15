@@ -24,7 +24,11 @@ bool ModuleSceneIntro::Start()
 	
 	App->physics->AddBody(s);
 
+	plane.SetPos(0, -1, 0);
+	plane.Scale(1000, 1, 1000);
+	plane.color = MyColor2;
 
+	App->physics->AddBody(plane,0.f);
 	
 	CreateMap();
 
@@ -46,14 +50,14 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 	Plane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
-	
+	//p.axis = true;
+	//p.Render();
+	plane.Render();
 	btVector3 offset(0,0,0);
 	offset = offset.rotate(btVector3({1,0,0}),30);
 
 
-
+	Render();
 	return UPDATE_CONTINUE;
 }
 
@@ -180,7 +184,7 @@ void ModuleSceneIntro::CreateMap() {
 
 void ModuleSceneIntro::AddWall(int x, int y, int z, btScalar width, float rotation) {
 
-
+	
 
 	btScalar mass = 0;
 	btVector3 fallInertia(0, 0, 0);
@@ -189,26 +193,24 @@ void ModuleSceneIntro::AddWall(int x, int y, int z, btScalar width, float rotati
 	btCollisionShape* wall = new btBoxShape(btVector3({ width,3,0.5 }));
 	wall->calculateLocalInertia(mass, fallInertia);
 	btDefaultMotionState* fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(0, rotation, 0, 1), btVector3(x, y, z)));
+		new btDefaultMotionState(btTransform(btQuaternion(0, rotation, 0, 1), btVector3(x, 3, z)));
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, wall, fallInertia);
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	App->physics->world->addRigidBody(fallRigidBody);
+	/*
+	Cube Wall;
+	Wall.size = vec3(width, 3,0.51);
+	Wall.SetPos(x, y, z);
 
-
-
-	Cube r_wall(width, 3, 0.5);
+	walls_vector.PushBack(Wall);
+	*/
+	
+	Cube r_wall(width*2, 6, 1);
 	fallRigidBody->getWorldTransform().getOpenGLMatrix(&r_wall.transform);
 	btQuaternion q = fallRigidBody->getWorldTransform().getRotation();
-	btVector3 offset(1, 1, 1);
-	offset = offset.rotate(q.getAxis(), q.getAngle());
-
-	r_wall.transform.M[12] += offset.getX();
-	r_wall.transform.M[13] += offset.getY();
-	r_wall.transform.M[14] += offset.getZ();
-
-
+	r_wall.color = MyColor;
 	walls_vector.PushBack(r_wall);
-
+	
 }
 
 void ModuleSceneIntro::Render() {
