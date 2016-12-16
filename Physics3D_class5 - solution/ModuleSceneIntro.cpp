@@ -57,6 +57,7 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	Plane p(0, 1, 0, 0);
 	//p.axis = true;
+	
 	s.Render();
 	plane.Render();
 	btVector3 offset(0,0,0);
@@ -276,6 +277,8 @@ void ModuleSceneIntro::Render() {
 
 	auto temp = walls_vector[0];
 	for (int i = 0; i < walls_vector.Count(); i++) {
-		walls_vector[i].Render();
+	
+		//walls_vector[i].Render();
+		
 	}
 }

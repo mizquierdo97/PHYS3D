@@ -87,6 +87,12 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 			PhysBody3D* pbodyA = (PhysBody3D*)obA->getUserPointer();
 			PhysBody3D* pbodyB = (PhysBody3D*)obB->getUserPointer();
 
+			if (pbodyB) {
+				if (pbodyB->IsSensor()) {
+					pbodyB->alive = false;
+
+				}
+			}
 			if(pbodyA && pbodyB)
 			{
 				p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();

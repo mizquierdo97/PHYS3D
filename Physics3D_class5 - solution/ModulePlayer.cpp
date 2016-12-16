@@ -125,18 +125,7 @@ update_status ModulePlayer::Update(float dt)
 	static float rot = quat.getX();
 	btQuaternion quattemp;
 
-	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-	{
-		acceleration = MAX_ACCELERATION;
-	}
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
-		
-	}
-	
 	quat = tr.getRotation();
 	float x;
 	x = quat.getX();
@@ -145,38 +134,88 @@ update_status ModulePlayer::Update(float dt)
 	float z;
 	z = quat.getZ();
 
+
+	mat4x4 m;
+	vehicle->GetTransform(&m);
+
+
+
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	{
+		acceleration = MAX_ACCELERATION;
+	}
+
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		{
+			if (m[13] > 2) {
+				vehicle->body->applyImpulse({ 0,0,1000 }, { 0,1,0 });
+				//vehicle->body->applyForce({ 10000,0,0 }, { 0,1,0 });
+			}
+
+		}
+	
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	{
+		acceleration = -MAX_ACCELERATION;
+		
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
+	{
+		if (m[13] > 2) {
+			vehicle->body->applyImpulse({0,0,-1000 }, { 0,1,0 });
+			//vehicle->body->applyForce({ -10000,0,0 }, { 0,1,0 });
+		}
+
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	{
+		if (turn > -TURN_DEGREES)
+			turn -= TURN_DEGREES;
+		
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	{
+		if (m[13] > 2) {
+			vehicle->body->applyForce({ -10000,0,0 }, { 0,0,1 });
+		}
+
+	}
+
+	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	{
+		if(turn < TURN_DEGREES)
+			turn +=  TURN_DEGREES;
+		
+		
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	{
+		if (m[13] > 2) {
+			vehicle->body->applyForce({ 10000,0,0 }, { 0,0,1 });
+		}
+	}
+
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
+	{
+		vehicle->body->applyForce({ 0,100000,0 }, { 0,0,0 });
+	}
+	
+	
+
 	/*if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
 		rot = x;
 	*/
 	
-	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-	{
-		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
-
-/*
-		rot -= 0.1;
-		quat.setEuler(rot, 0, 0);
-		tr.setRotation(quat);
-		vehicle->body->setCenterOfMassTransform(tr);
-		
-		rot -=0.005;
-		quat.setEuler(x + rot ,y ,z );		
-		tr.setRotation(quat);
-		
-		
-
-		vehicle->body->setCenterOfMassTransform(tr);*/
-	}
-		
 	
 	
 
-	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	{
-		acceleration = -MAX_ACCELERATION;
-		//brake = BRAKE_POWER;
-	}
+	
 
 	if (vehicle->GetKmh() > 70) {
 		acceleration = 0;
@@ -198,17 +237,9 @@ update_status ModulePlayer::Update(float dt)
 
 	//rot = temp[2];
 	
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
-		
-		rot += 0.1;
-		quat.setEuler(rot, 0, 0);
-		tr.setRotation(quat);	
-		vehicle->body->setCenterOfMassTransform(tr);
-	}   
+	
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE) {
-		//rot = temp[2];
-	}
+	
 	vehicle->collision_listeners;
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);

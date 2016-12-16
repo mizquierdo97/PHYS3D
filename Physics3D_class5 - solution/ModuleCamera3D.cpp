@@ -100,34 +100,33 @@ update_status ModuleCamera3D::Update(float dt)
 
 	////
 	
-	//if (following != NULL)
-	//{
-	//	mat4x4 m;
-	//	following->GetTransform(&m);
+	if (following != NULL)
+	{
+		mat4x4 m;
+		following->GetTransform(&m);
 
-	//	Look(Position, m.translation(), true);
+		Look(Position, m.translation(), true);
 
-	//	// Correct height
-	//	Position.y = m[13] + 7;
-	//	//Position.y = (14.9*Position.y + Position.y + following_height) / 16.0;
+		// Correct height
+		Position.y = m[13] + 7;
+		//Position.y = (14.9*Position.y + Position.y + following_height) / 16.0;
 
-	//	// Correct distance
-	//	vec3 cam_to_target = m.translation() - Position;
-	//	float dist = length(cam_to_target);
-	//	float correctionFactor = 0.f;
-	//	if (dist < min_following_dist)
-	//	{
-	//		correctionFactor = 0.15*(min_following_dist - dist) / dist;
-	//	}
-	//	if (dist > max_following_dist)
-	//	{
-	//		correctionFactor = 0.15*(max_following_dist - dist) / dist;
-	//	}
-	//	Position -= correctionFactor * cam_to_target ; 
-	//}
-	////
-	//
-	//
+		// Correct distance
+		vec3 cam_to_target = m.translation() - Position;
+		float dist = length(cam_to_target);
+		float correctionFactor = 0.f;
+		if (dist < min_following_dist)
+		{
+			correctionFactor = 0.15*(min_following_dist - dist) / dist;
+		}
+		if (dist > max_following_dist)
+		{
+			correctionFactor = 0.15*(max_following_dist - dist) / dist;
+		}
+		Position -= correctionFactor * cam_to_target ; 
+	}
+	
+	
 
 
 	//vec3 newPos(0,0,0);
