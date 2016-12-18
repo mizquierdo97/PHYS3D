@@ -99,7 +99,7 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 
 	////
-	
+	/*
 	if (following != NULL)
 	{
 		mat4x4 m;
@@ -125,7 +125,7 @@ update_status ModuleCamera3D::Update(float dt)
 		}
 		Position -= correctionFactor * cam_to_target ; 
 	}
-	
+	*/
 	
 
 

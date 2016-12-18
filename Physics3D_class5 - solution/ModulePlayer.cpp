@@ -97,7 +97,7 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 20, 5);
+	vehicle->SetPos(0, 10, 5);
 	
 	App->camera->Follow(vehicle, 17, 17, 1.f);
 
@@ -145,10 +145,11 @@ update_status ModulePlayer::Update(float dt)
 		acceleration = MAX_ACCELERATION;
 	}
 
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
 			if (m[13] > 2) {
-				vehicle->body->applyImpulse({ 0,0,1000 }, { 0,1,0 });
+			
+				vehicle->body->applyImpulse({ 1000*x,0,1000*z }, { 0,1,0 });
 				//vehicle->body->applyForce({ 10000,0,0 }, { 0,1,0 });
 			}
 

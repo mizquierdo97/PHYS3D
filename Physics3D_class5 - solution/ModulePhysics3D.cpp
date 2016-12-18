@@ -89,7 +89,8 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 
 			if (pbodyB) {
 				if (pbodyB->IsSensor()) {
-					pbodyB->alive = false;
+					pbodyB->SetPos(100, -20, 100);
+					App->player->score += 100;
 
 				}
 			}
