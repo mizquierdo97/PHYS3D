@@ -99,7 +99,7 @@ bool ModulePlayer::Start()
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(0, 10, 5);
 	
-	App->camera->Follow(vehicle, 17, 17, 1.f);
+	App->camera->Follow(vehicle, 30, 30, 1.f);
 
 	return true;
 }
@@ -133,7 +133,7 @@ update_status ModulePlayer::Update(float dt)
 	y = quat.getY();
 	float z;
 	z = quat.getZ();
-
+	//y = cos(y);
 
 	mat4x4 m;
 	vehicle->GetTransform(&m);
@@ -145,12 +145,12 @@ update_status ModulePlayer::Update(float dt)
 		acceleration = MAX_ACCELERATION;
 	}
 
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
 		{
 			if (m[13] > 2) {
 			
-				vehicle->body->applyImpulse({ 1000*x,0,1000*z }, { 0,1,0 });
-				//vehicle->body->applyForce({ 10000,0,0 }, { 0,1,0 });
+				vehicle->body->applyImpulse({ 0,0,1000}, { 0,1,0 });
+				
 			}
 
 		}
@@ -166,7 +166,7 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if (m[13] > 2) {
 			vehicle->body->applyImpulse({0,0,-1000 }, { 0,1,0 });
-			//vehicle->body->applyForce({ -10000,0,0 }, { 0,1,0 });
+			
 		}
 
 	}

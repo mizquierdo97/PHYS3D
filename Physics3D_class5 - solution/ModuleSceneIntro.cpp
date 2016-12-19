@@ -89,15 +89,7 @@ void ModuleSceneIntro::CreateMap() {
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	App->physics->world->addRigidBody(fallRigidBody);
 
-	/*
-	//btCollisionShape* wall2 = new btBoxShape(btVector3({ 20,3,0.5 }));
-	//wall->calculateLocalInertia(mass, fallInertia);
-	btDefaultMotionState* fallMotionState2 =
-		new btDefaultMotionState(btTransform(btQuaternion(0, 1, 0, 1), btVector3(-15, 2, 48)));
-	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI2(mass, fallMotionState2, wall, fallInertia);
-	btRigidBody* fallRigidBody2 = new btRigidBody(fallRigidBodyCI2);
-	App->physics->world->addRigidBody(fallRigidBody2);
-	*/
+	
 
 	//START BACK WALL
 	AddWall(0, 2, -20, 12, 0);
@@ -278,7 +270,7 @@ void ModuleSceneIntro::Render() {
 	auto temp = walls_vector[0];
 	for (int i = 0; i < walls_vector.Count(); i++) {
 	
-		//walls_vector[i].Render();
+		walls_vector[i].Render();
 		
 	}
 }
