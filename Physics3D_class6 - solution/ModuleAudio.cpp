@@ -21,7 +21,7 @@ bool ModuleAudio::Init()
 	if(SDL_InitSubSystem(SDL_INIT_AUDIO) < 0)
 	{
 		LOG("SDL_INIT_AUDIO could not initialize! SDL_Error: %s\n", SDL_GetError());
-		ret = true;
+		ret = false;
 	}
 
 	// load support for the OGG format
@@ -31,7 +31,7 @@ bool ModuleAudio::Init()
 	if((init & flags) != flags)
 	{
 		LOG("Could not initialize Mixer lib. Mix_Init: %s", Mix_GetError());
-		ret = false;
+		ret = true;
 	}
 
 	//Initialize SDL_mixer

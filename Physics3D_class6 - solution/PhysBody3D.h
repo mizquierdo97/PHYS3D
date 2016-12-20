@@ -23,8 +23,8 @@ public:
 
 	btRigidBody* body = nullptr;
 
-	bool alive = true;
 private:
+	
 	bool is_sensor = false;
 
 public:

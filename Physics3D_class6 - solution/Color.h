@@ -30,5 +30,3 @@ extern Color Green;
 extern Color Blue;
 extern Color Black;
 extern Color White;
-extern Color MyColor;
-extern Color MyColor2;

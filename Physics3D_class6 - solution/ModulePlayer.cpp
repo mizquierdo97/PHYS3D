@@ -19,10 +19,10 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	VehicleInfo car;
-	
+
 	// Car properties ----------------------------------------
-	car.chassis_size.Set(2, 2, 4);
-	car.chassis_offset.Set(0, 1.5, 0);
+	car.chassis_size.Set(2, 1, 4);
+	car.chassis_offset.Set(0, 1, 0);
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;
 	car.suspensionCompression = 0.83f;
@@ -41,10 +41,10 @@ bool ModulePlayer::Start()
 
 	float half_width = car.chassis_size.x*0.5f;
 	float half_length = car.chassis_size.z*0.5f;
-	
-	vec3 direction(0,-1,0);
-	vec3 axis(-1,0,0);
-	
+
+	vec3 direction(0, -1, 0);
+	vec3 axis(-1, 0, 0);
+
 	car.num_wheels = 4;
 	car.wheels = new Wheel[4];
 
@@ -97,8 +97,10 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 10, 5);
-	
+	vehicle->SetPos(0, 11, -3);
+
+	vehicle->GetTransform(&initial_trans);
+
 	App->camera->Follow(vehicle, 30, 30, 1.f);
 
 	return true;
@@ -126,47 +128,48 @@ update_status ModulePlayer::Update(float dt)
 	btQuaternion quattemp;
 
 
-	quat = tr.getRotation();
-	float x;
-	x = quat.getX();
-	float y;
-	y = quat.getY();
-	float z;
-	z = quat.getZ();
-	//y = cos(y);
+
 
 	mat4x4 m;
 	vehicle->GetTransform(&m);
 
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || m[13] < 4) {
+		vehicle->body->setAngularVelocity({0,0,0});		
+		vehicle->body->setLinearVelocity({0,0,0});
+		vehicle->SetTransform(&initial_trans);
+		App->camera->Move(vec3(0.0f, 20.0f, -20.0f));
+		App->player->score = 0;
+		App->scene_intro->Restart();
 
+	}
 
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
 		acceleration = MAX_ACCELERATION;
 	}
 
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
-		{
-			if (m[13] > 2) {
-			
-				vehicle->body->applyImpulse({ 0,0,1000}, { 0,1,0 });
-				
-			}
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN)
+	{
+		if (m[13] > 13) {
+
+			vehicle->body->applyImpulse({ 0,0,1000 }, { 0,1,0 });
 
 		}
-	
+
+	}
+
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
 		acceleration = -MAX_ACCELERATION;
-		
+
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN)
 	{
-		if (m[13] > 2) {
-			vehicle->body->applyImpulse({0,0,-1000 }, { 0,1,0 });
-			
+		if (m[13] > 13) {
+			vehicle->body->applyImpulse({ 0,0,-1000 }, { 0,1,0 });
+
 		}
 
 	}
@@ -175,48 +178,49 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if (turn > -TURN_DEGREES)
 			turn -= TURN_DEGREES;
-		
+
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		if (m[13] > 2) {
+		if (m[13] > 13) {
 			vehicle->body->applyForce({ -10000,0,0 }, { 0,0,1 });
 		}
 
 	}
 
-	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
-		
-		
+		if (turn < TURN_DEGREES)
+			turn += TURN_DEGREES;
+
+
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
-		if (m[13] > 2) {
+		if (m[13] > 13) {
 			vehicle->body->applyForce({ 10000,0,0 }, { 0,0,1 });
 		}
 	}
 
 
+	/*
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT)
 	{
 		vehicle->body->applyForce({ 0,100000,0 }, { 0,0,0 });
 	}
-	
-	
+	*/
+
 
 	/*if (App->input->GetKey(SDL_SCANCODE_Z) == KEY_DOWN)
-		rot = x;
+	rot = x;
 	*/
-	
-	
-	
 
-	
+
+
+
+
 
 	if (vehicle->GetKmh() > 70) {
 		acceleration = 0;
@@ -225,7 +229,7 @@ update_status ModulePlayer::Update(float dt)
 	if (vehicle->GetKmh() < -70) {
 		acceleration = 0;
 	}
-	
+
 	mat4x4 matrix;
 	mat4x4 temp;
 	vehicle->GetTransform(&temp);
@@ -233,27 +237,24 @@ update_status ModulePlayer::Update(float dt)
 	matrix[12] = temp[12];
 	matrix[13] = temp[13];
 	matrix[14] = temp[14];
-		
-	
+
+
 
 	//rot = temp[2];
-	
-	
 
-	
+
+
+
 	vehicle->collision_listeners;
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
-	
+
 	vehicle->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
+	sprintf_s(title, "%.1f Km/h     %i", vehicle->GetKmh(), score);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
 }
-
-
-

@@ -48,7 +48,6 @@ void PhysVehicle3D::Render()
 	chassis.transform.M[13] += offset.getY();
 	chassis.transform.M[14] += offset.getZ();
 
-	//Cube map(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z);
 
 	chassis.Render();
 }

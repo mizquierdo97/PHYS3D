@@ -140,8 +140,5 @@
     <ClCompile Include="ModulePlayer.cpp">
       <Filter>Sources\Modules\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Walls.cpp">
-      <Filter>Sources\Modules\Game</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

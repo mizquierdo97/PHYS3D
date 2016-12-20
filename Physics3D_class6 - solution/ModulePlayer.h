@@ -20,10 +20,11 @@ public:
 	bool CleanUp();
 
 public:
-
+	
 	PhysVehicle3D* vehicle;
 	float turn;
 	float acceleration;
 	float brake;
-	int score;
+	int score = 0;
+	mat4x4 initial_trans;
 };
