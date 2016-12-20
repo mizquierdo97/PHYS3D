@@ -23,9 +23,13 @@ bool ModuleSceneIntro::Start()
 	App->camera->LookAt(vec3(0, 0, 0));
 
 	Big_Sphere = new Sphere(10);
-	Big_Sphere->SetPos(0, 30, 0);
+	Big_Sphere->SetPos(-23.5, 60, -70);
+	PhysBody3D* b_sphere;
+	
+	b_sphere = App->physics->AddBody(*Big_Sphere, 1000.f);
+	b_sphere->body->setRestitution((btScalar)1);
+	b_sphere->body->setGravity({ 0,-100,0 });
 
-	App->physics->AddBody(*Big_Sphere, 10000.f);
 
 	plane.SetPos(0, -1, 0);
 	plane.Scale(1000, 1, 1000);
@@ -195,10 +199,10 @@ void ModuleSceneIntro::CreateMap() {
 
 	// -- RAMPA --
 
-	btCollisionShape* wall = new btBoxShape(btVector3({ 20,3,0.5 }));
+	btCollisionShape* wall = new btBoxShape(btVector3({ 20,30,0.5 }));
 	wall->calculateLocalInertia(mass, fallInertia);
 	btDefaultMotionState* fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, 1), btVector3(15, 0, 48)));
+		new btDefaultMotionState(btTransform(btQuaternion(0.7, 0, 0, 1), btVector3(-23.5, 40, -60)));
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, wall, fallInertia);
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	App->physics->world->addRigidBody(fallRigidBody);
@@ -397,7 +401,7 @@ void ModuleSceneIntro::Walls() {
 	AddWall(92 + i, -18 + k, 25, -2);
 
 	//DCH
-	AddWall(60 + i, 15 + k, 30, 1);
+	AddWall(56 + i, 15 + k, 30, 1);
 	AddWall(77 + i, 23 + k, 22, 1);
 	AddWall(92 + i, 93 + k, 35, 2);  // PARED RARA BOLA RODANTE
 	AddWall(104 + i, 80 + k, 45, 2);
