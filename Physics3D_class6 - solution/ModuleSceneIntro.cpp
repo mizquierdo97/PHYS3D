@@ -229,7 +229,7 @@ void ModuleSceneIntro::CreateMap() {
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	App->physics->world->addRigidBody(fallRigidBody);
 
-
+	/*
 
 	//START BACK WALL
 	AddWall(0, -20, 12, 0);
@@ -361,7 +361,7 @@ void ModuleSceneIntro::CreateMap() {
 
 
 
-
+*/
 
 
 
@@ -376,11 +376,215 @@ void ModuleSceneIntro::CreateMap() {
 void ModuleSceneIntro::Walls() {
 
 	//BACK FIRST WALL
+	btScalar mass = 0;
+	btVector3 fallInertia(0, 0, 0);
+
+	////////////////
+	// UP(D)
+	btCollisionShape* wall = new btBoxShape(btVector3({ 12,15,1 }));
+	wall->calculateLocalInertia(mass, fallInertia);
+	btDefaultMotionState* fallMotionState =
+		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, 0.7), btVector3(-267, 11, 48)));
+	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, wall, fallInertia);
+	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
+	App->physics->world->addRigidBody(fallRigidBody);
+
+	//UP(U)
+	btCollisionShape* wall1 = new btBoxShape(btVector3({ 12,15,1 }));
+	wall1->calculateLocalInertia(mass, fallInertia);
+	btDefaultMotionState* fallMotionState1 =
+		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, -0.7), btVector3(-268, 11, 88)));
+	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI1(mass, fallMotionState1, wall1, fallInertia);
+	btRigidBody* fallRigidBody1 = new btRigidBody(fallRigidBodyCI1);
+	App->physics->world->addRigidBody(fallRigidBody1);
+
+	// UP(D)
+	btCollisionShape* wall2 = new btBoxShape(btVector3({ 14,15,1 }));
+	wall2->calculateLocalInertia(mass, fallInertia);
+	btDefaultMotionState* fallMotionState2 =
+		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, 0.7), btVector3(37, 11, -20)));
+	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI2(mass, fallMotionState2, wall2, fallInertia);
+	btRigidBody* fallRigidBody2 = new btRigidBody(fallRigidBodyCI2);
+	App->physics->world->addRigidBody(fallRigidBody2);
+
+	//UP(U)
+	btCollisionShape* wall3 = new btBoxShape(btVector3({ 14,15,1 }));
+	wall3->calculateLocalInertia(mass, fallInertia);
+	btDefaultMotionState* fallMotionState3 =
+		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, -0.7), btVector3(37, 11, 20)));
+	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI3(mass, fallMotionState3, wall3, fallInertia);
+	btRigidBody* fallRigidBody3 = new btRigidBody(fallRigidBodyCI3);
+	App->physics->world->addRigidBody(fallRigidBody3);
+
+	// UP(D)
+	btCollisionShape* wall4 = new btBoxShape(btVector3({ 10,15,1 }));
+	wall2->calculateLocalInertia(mass, fallInertia);
+	btDefaultMotionState* fallMotionState4 =
+		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, 0.7), btVector3(-300, 11, -200)));
+	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI4(mass, fallMotionState4, wall4, fallInertia);
+	btRigidBody* fallRigidBody4 = new btRigidBody(fallRigidBodyCI4);
+	App->physics->world->addRigidBody(fallRigidBody4);
+
+	//UP(U)
+	btCollisionShape* wall5 = new btBoxShape(btVector3({ 10,15,1 }));
+	wall3->calculateLocalInertia(mass, fallInertia);
+	btDefaultMotionState* fallMotionState5 =
+		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, -0.7), btVector3(-300, 11, -145)));
+	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI5(mass, fallMotionState5, wall5, fallInertia);
+	btRigidBody* fallRigidBody5 = new btRigidBody(fallRigidBodyCI5);
+	App->physics->world->addRigidBody(fallRigidBody5);
+
+
+
+
+	// ________________________ WALLS________________________//
+
+	//START BACK WALL
+	AddWall(0, -20, 12, 0);
+
+
+	AddWall(10, 30, 50, 1);
+	AddWall(5, 87, 10, -2);
+	AddWall(-86, 93, 90, 0);
+
+	AddWall(-191, 85, 10, -1.7);
+	AddWall(-196, 79, 10, 0.2);
+	AddWall(-225, 59, 50, 0);
+	AddWall(-284, 55, 10, -0.2);
+	AddWall(-309, 35, 25, -0.4);
+
+	AddWall(-255, 83, 50, 0);
+	AddWall(-316, 78, 13, -0.2);
+	AddWall(-337, 61, 19, -0.5);
+
+
+	// -----------------------------//
+	//CURVA RARA
+	AddWall(-226, 115, 13, 0.3);
+	AddWall(-243, 122, 7, 0);
+	AddWall(-254, 117, 7, 2);
+	AddWall(-258, 105, 7, 1);
+	//END CURVA RARA
+
+	AddWall(-277, 105, 7, 1);
+	AddWall(-286, 123, 15, -2);
+	AddWall(-308, 135, 13, 0);
+	AddWall(-334, 95, 43, 1.4);
+
+	//AddWall(-210, 135, 15, -2);
+	AddWall(-240, 148, 30, 0.1);
+	AddWall(-297, 153, 30, 0);
+	AddWall(-334, 143, 15, 2);
+	AddWall(-354, 99, 43, 1.4);
+	AddWall(-367, 45, 20, 1);
+
+	AddWall(-348, 45, 10, 1);
+
+	AddWall(-363, 20, 20, 0.8);
+	AddWall(-327, 13, 5, -1);
+	AddWall(-325, 4, 5, 0.7);
+	AddWall(-351, -8, 15, -2.2);
+
+	AddWall(-341, -43, 25, 1);
+	AddWall(-304, -1, 20, 0);
+
+	AddWall(-276, 20, 16, 1);
+	AddWall(-280, 2, 5, 3.4);
+
+	AddWall(-256, 20, 16, 1);
+	AddWall(-256, -20, 25, 1);
+	AddWall(-253, -48, 5, -2);
+	AddWall(-218, -52, 32, 0);
+	AddWall(-218, -67, 32, 0);
+	AddWall(-186, -60, 11, 1);
+	AddWall(-253, -71, 5, 2);
+	AddWall(-285, -75, 30, 0);
+
+	AddWall(-317, -79, 5, 2);
+	AddWall(-341, -82, 16, 1);
+	AddWall(-320, -90, 8, 1);
+
+	// ROTONDA
+	AddWall(-278, -40, 15, 1);
+	AddWall(-318, -40, 15, 1);
+
+	AddWall(-281, -22, 5, -2);
+	AddWall(-315, -22, 5, 2);
+
+	AddWall(-281, -58, 5, 2);
+	AddWall(-315, -58, 5, -2);
+
+	AddWall(-298, -18, 15, 0);
+	AddWall(-298, -62, 15, 0);
+	// END ROTONDA
+
+	//FIXING i & k
+
+
+	////////////////////////////////////////////////////////////                AQUI
+	/*AddWall(-310, 2, -175, 38, -1);
+	AddWall(-290, 2, -175, 38, -1);*/
+
+	AddWall(-326, -116, 27, -2);
+	AddWall(-305, -117, 25, -2);
+
+
+	// -----------------------------//
+
+	AddWall(-45, 40, 25, 1);
+	AddWall(-51, 8, 10, 2);
+	AddWall(-62, 8, 10, -2);
+	AddWall(-68, 40, 25, 1);
+	AddWall(-57, 65, 12, 0);
+
+	int i = 85;
+	AddWall(-45 - i, 40, 25, 1);
+	AddWall(-51 - i, 8, 10, 2);
+	AddWall(-62 - i, 8, 10, -2);
+	AddWall(-68 - i, 40, 25, 1);
+	AddWall(-57 - i, 65, 12, 0);
+
+
+	AddWall(-10, 20, 40, 1);
+	AddWall(-15, 64, 7, -2);
+	AddWall(-23, 64, 7, 2);
+	AddWall(-27, 29, 30, 1);
+	AddWall(-33, -9, 10, 2);
+	AddWall(-60, -17, 20, 0);
+	AddWall(-87, -9, 10, -2);
+	AddWall(-93, 29, 30, 1);
+
+	i = 82;
+	AddWall(-15 - i, 64, 7, -2);
+	AddWall(-23 - i, 64, 7, 2);
+	AddWall(-27 - i, 29, 30, 1);
+	AddWall(-33 - i, -9, 10, 2);
+	AddWall(-60 - i, -17, 20, 0);
+	AddWall(-87 - i, -9, 10, -2);
+	AddWall(-93 - i, 29, 30, 1);
+
+	//ADD
+
+	AddWall(-111 - i, 117, 30, -2);
+	AddWall(-123 - i, 100, 13, -2.9);
+
+	///Obstacles
+	AddWall(-20, 86, 7, 1);
+	AddWall(-60, 72, 7, 1);
+	AddWall(-80, 86, 7, 1);
+	AddWall(-101, 74, 5, 1);
+	AddWall(-140, 86, 7, 1);
+
+
+
+
+	/////
+
 
 	// --------
-	int i = -90;
+	 i = -90;
 	int k = -160;
-
+	
 	AddWall(-220 + i, -60 + k, 10, 1);
 	AddWall(-200 + i, -60 + k, 10, 1);
 
@@ -417,7 +621,7 @@ void ModuleSceneIntro::Walls() {
 	AddWall(93 + i, -101 + k, 10, 2);
 
 	//--------------------------//
-
+	
 	AddWall(99 + i, -74 + k, 20, 1);
 	AddWall(78 + i, -26 + k, 35, -2);
 	AddWall(92 + i, -18 + k, 25, -2);
@@ -458,6 +662,6 @@ void ModuleSceneIntro::Walls() {
 	//END
 	AddWall(113 + i, 210 + k, 40, 1);
 	AddWall(140 + i, 210 + k, 40, 1);
-
+	
 
 }
