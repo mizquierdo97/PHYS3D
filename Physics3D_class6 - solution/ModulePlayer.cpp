@@ -135,11 +135,7 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->GetTransform(&m);
 
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN || m[13] < 4) {
-		vehicle->body->setAngularVelocity({0,0,0});		
-		vehicle->body->setLinearVelocity({0,0,0});
-		vehicle->SetTransform(&initial_trans);
-		App->camera->Move(vec3(0.0f, 20.0f, -20.0f));
-		App->player->score = 0;
+		
 		App->scene_intro->Restart();
 
 	}

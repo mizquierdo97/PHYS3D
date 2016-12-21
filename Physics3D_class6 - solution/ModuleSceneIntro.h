@@ -46,6 +46,6 @@ public:
 	p2DynArray<Cube> walls_vector;
 	p2DynArray<Points> Coins;
 	p2DynArray<Cube> ground_vector;
-	
+	PhysBody3D* b_sphere;
 	Sphere* Big_Sphere;
 };

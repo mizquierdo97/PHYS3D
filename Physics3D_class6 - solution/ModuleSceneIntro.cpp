@@ -24,10 +24,13 @@ bool ModuleSceneIntro::Start()
 
 	Big_Sphere = new Sphere(10);
 	Big_Sphere->SetPos(-23.5, 60, -70);
-	PhysBody3D* b_sphere;
+
+
+	
 	
 	b_sphere = App->physics->AddBody(*Big_Sphere, 1000.f);
-	b_sphere->body->setRestitution((btScalar)1);
+	
+	b_sphere->collision_listeners.add(this);
 	b_sphere->body->setGravity({ 0,-100,0 });
 
 
@@ -95,8 +98,11 @@ update_status ModuleSceneIntro::Update(float dt)
 	for (int i = 0; i < ground_vector.Count(); i++) {
 		ground_vector[i].Render();
 	}
-
-
+	mat4x4 m;
+	b_sphere->GetTransform(&m);
+	Big_Sphere->transform = m;
+	//Big_Sphere->SetPos(m[12], m[13], m[14]);
+	Big_Sphere->Render();
 	//s.Render();
 	//plane.Render();
 	btVector3 offset(0, 0, 0);
@@ -180,6 +186,11 @@ void ModuleSceneIntro::Restart()
 {
 	for (int i = 0; i < Coins.Count(); i++) {
 		mat4x4 m;
+		App->player->vehicle->body->setAngularVelocity({ 0,0,0 });
+		App->player->vehicle->body->setLinearVelocity({ 0,0,0 });
+		App->player->vehicle->SetTransform(&App->player->initial_trans);
+		App->camera->Move(vec3(0.0f, 20.0f, -20.0f));
+		App->player->score = 0;
 		Coins[i].sensor->GetTransform(&m);
 		if (Coins[i].active == false) {
 			Coins[i].sensor->SetPos(m[12], m[13] + 20, m[14]);
@@ -204,6 +215,13 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			}
 		}
 	}
+	
+	if (body1 == b_sphere || body2 == b_sphere) {
+		if(body1 == App->player->vehicle || body2 == App->player->vehicle) {
+			Restart();
+		}
+	}
+
 	
 	
 }
