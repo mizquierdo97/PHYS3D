@@ -36,19 +36,36 @@ public:
 	void AddCoin(int x, int y, int z);
 
 	void Walls();
+	void Coin();
+	void Ramps();
+	void Ground();
 
 	void Render();
 	void Restart();
 
 public:
 
-	btHingeConstraint* hinge;
-	Cube* door;
-	PhysBody3D* b_door;
-	Cube* pivot;
-	PhysBody3D* b_pivot;
 
-	Cube plane;
+
+	Cube* cons_1;
+	Cube* cons_2;
+	Cube* cons_3;
+
+	PhysBody3D* b_cons_1;
+	PhysBody3D* b_cons_2;
+	PhysBody3D* b_cons_3;
+	
+	Cube* pivot_1;
+	Cube* pivot_2;
+	Cube* pivot_3;
+
+	PhysBody3D* b_pivot_1;
+	PhysBody3D* b_pivot_2;
+	PhysBody3D* b_pivot_3;
+
+	PhysBody3D* bb_sensor;
+	PhysBody3D* bb_wall;
+
 	p2DynArray<Cube> walls_vector;
 	p2DynArray<Points> Coins;
 	p2DynArray<Cube> ground_vector;
