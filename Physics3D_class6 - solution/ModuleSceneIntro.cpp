@@ -41,14 +41,32 @@ bool ModuleSceneIntro::Start()
 	CreateMap();
 
 	AddCoin(3, 10, 2);
-	/*AddGround(00, 37, 20, 115, 0);
-	AddGround(-61,80,30,62,90);
-	AddGround(-143, 80, 30, 62, 90);
-	AddGround(-20, 75, 20, 35, 0);
-	AddGround(-102, 75, 20, 35, 0);
-	AddGround(-35, 37, 70, 20, 90);
-	AddGround(-102, 75, 20, 35, 90);*/
+	
+
+	///
 	AddGround(-82, 37, 188, 115, 0);
+	AddGround(-240, 71, 130, 23, 0);
+	AddGround(-266, 0, 20,70, 0);
+
+	AddGround(-268,115, 20, 30, 0);
+	AddGround(-260, 130, 50, 15, 0);
+	AddGround(-300, 144, 55, 18, 0);	
+	AddGround(-247, 140, 60, 18, 12);
+
+	AddGround(-330, 135, 27, 17, -52);
+	AddGround(-345, 95, 20, 85, 19);
+	//Square
+	AddGround(-299, -38, 85, 73, 0);
+
+	AddGround(-221, -60, 71, 15, 0);
+
+	//Retocar
+	AddGround(-330, -82, 20, 30, 0);
+
+	//25º
+	AddGround(-287, 65, 30, 20, -25);
+	AddGround(-313, 68, 30, 20, -23);
+	AddGround(-317, 42, 50, 20, -44);
 
 	return ret;
 }
@@ -99,7 +117,7 @@ void ModuleSceneIntro::AddCoin(int x,int y,int z) {
 	Points temp_struct;
 	temp_struct.coin = temp;
 	temp_struct.active = true;
-
+	temp->color = Yellow;
 	PhysBody3D* sensor = App->physics->AddBody(*temp, 0.f);
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
