@@ -20,6 +20,7 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 	App->audio->Init();
 	App->audio->PlayMusic("Music.ogg");
+	App->audio->LoadFx("Colision2.wav");
 	App->camera->Move(vec3(1.0f, 200.0f, -100.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
@@ -229,13 +230,19 @@ void ModuleSceneIntro::AddWall(int x, int z, btScalar width, float rotation) {
 		new btDefaultMotionState(btTransform(btQuaternion(0, rotation, 0, 1), btVector3(x, 10, z)));
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, wall, fallInertia);
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
+	
 	App->physics->world->addRigidBody(fallRigidBody);
 
 
 	Cube r_wall(width * 2, 6, 1);
+
 	fallRigidBody->getWorldTransform().getOpenGLMatrix(&r_wall.transform);
 	btQuaternion q = fallRigidBody->getWorldTransform().getRotation();
 	r_wall.color = Blue;
+
+	PhysBody3D* sensor =  App->physics->AddBody(r_wall, 0.f);
+	sensor->collision_listeners.add(this);
+
 	walls_vector.PushBack(r_wall);
 
 }
@@ -272,6 +279,7 @@ void ModuleSceneIntro::Restart()
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	if (body1 == App->player->vehicle || body2 == App->player->vehicle) {
+		
 		for (int i = 0; i < Coins.Count(); i++) {
 			if (body1 == Coins[i].sensor || body2 == Coins[i].sensor) {
 
@@ -280,16 +288,18 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 				Coins[i].sensor->SetPos(m[12], m[13] - 20, m[14]);
 				Coins[i].active = false;
 				App->player->score += 100;
+				App->audio->PlayFx(1);
 			}
 		}
 	}
 	
-	if (body1 == b_sphere || body2 == b_sphere) {
+	else if (body1 == b_sphere || body2 == b_sphere) {
 		if(body1 == App->player->vehicle || body2 == App->player->vehicle) {
 			Restart();
 		}
 	}
 
+	
 	
 	
 }
