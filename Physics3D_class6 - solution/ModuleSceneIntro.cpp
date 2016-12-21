@@ -63,12 +63,12 @@ bool ModuleSceneIntro::Start()
 	///
 	AddGround(-82, 37, 188, 115, 0);
 	AddGround(-240, 71, 130, 23, 0);
-	AddGround(-266, 0, 20,70, 0);
+	AddGround(-266, 0, 20, 70, 0);
 
-	AddGround(-268,115, 20, 30, 0);
+	AddGround(-268, 115, 20, 30, 0);
 	AddGround(-260, 130, 50, 15, 0);
-	AddGround(-300, 144, 55, 18, 0);	
-	AddGround(-247, 140, 60, 18, 12);
+	AddGround(-300, 144, 55, 18, 0);
+	AddGround(-243, 140, 65, 18, 10);
 
 	AddGround(-330, 135, 27, 17, -52);
 	AddGround(-345, 95, 20, 85, 19);
@@ -78,12 +78,49 @@ bool ModuleSceneIntro::Start()
 	AddGround(-221, -60, 71, 15, 0);
 
 	//Retocar
-	AddGround(-330, -82, 20, 30, 0);
+	AddGround(-330, -82, 21, 30, 0);
 
 	//25º
 	AddGround(-287, 65, 30, 20, -25);
 	AddGround(-313, 68, 30, 20, -23);
 	AddGround(-317, 42, 50, 20, -44);
+	AddGround(-334, 50, 40, 20, -52);
+
+	AddGround(-358, 50, 30, 20, -90);
+	AddGround(-354, 25, 30, 20, -103);
+	AddGround(-345, 20, 30, 35, -90);
+	AddGround(-338, 10, 20, 35, -20);
+	AddGround(-345, 0, 20, 33, -40);
+
+	//-----------------// PARCHES ESQUINAS
+
+	AddGround(-278, -1, 8, 10, 53);
+	AddGround(-255, -50, 6, 10, -40);
+	AddGround(-255, -69, 6, 10, 40);
+	AddGround(-319, -77, 6, 10, 40);
+
+	//-----------------// PARCHES ESQUINAS UP
+
+	AddGround(-257, 120, 8, 13, 40);
+	AddGround(-283, 126, 9, 30, -37);
+
+	//CAMINO CURVA RARA PRINCIPIO
+	AddGround(-197, 109, 16, 73, -37);
+	AddGround(-190, 89, 5, 15, -32);
+	AddGround(-213, 114, 15, 55, -55);
+
+	// CAMINO 2a parte cicuito antes rampa
+	AddGround(-315, -117, 16, 62, -37);
+
+	// CAMINO 2a parte cicuito despues rampa
+	AddGround(-300, -220, 20, 20, 0);
+
+	//Rampa a la nada
+	AddGround(-334, -280, 22, 132, 37);
+
+	//cuadrado grande 2a parte
+	AddGround(-135, -273, 85, 330, 90);
+
 
 	return ret;
 }
@@ -698,5 +735,7 @@ void ModuleSceneIntro::Walls() {
 	AddWall(113 + i, 210 + k, 40, 1);
 	AddWall(140 + i, 210 + k, 40, 1);
 	
+
+	AddWall(67 + i, 60 + k, 20, 2);
 
 }
