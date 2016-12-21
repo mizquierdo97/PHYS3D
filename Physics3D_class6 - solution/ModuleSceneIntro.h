@@ -42,6 +42,12 @@ public:
 
 public:
 
+	btHingeConstraint* hinge;
+	Cube* door;
+	PhysBody3D* b_door;
+	Cube* pivot;
+	PhysBody3D* b_pivot;
+
 	Cube plane;
 	p2DynArray<Cube> walls_vector;
 	p2DynArray<Points> Coins;

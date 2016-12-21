@@ -219,11 +219,11 @@ update_status ModulePlayer::Update(float dt)
 
 
 
-	if (vehicle->GetKmh() > 70) {
+	if (vehicle->GetKmh() > 100) {
 		acceleration = 0;
 	}
 
-	if (vehicle->GetKmh() < -70) {
+	if (vehicle->GetKmh() < -100) {
 		acceleration = 0;
 	}
 

@@ -18,16 +18,24 @@ bool ModuleSceneIntro::Start()
 {
 	LOG("Loading Intro assets");
 	bool ret = true;
-
+	App->audio->Init();
+	App->audio->PlayMusic("Music.ogg");
 	App->camera->Move(vec3(1.0f, 200.0f, -100.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
 	Big_Sphere = new Sphere(10);
 	Big_Sphere->SetPos(-23.5, 60, -70);
 
+	//
+	door = new Cube(3, 10, 0.5);
+	door->SetPos(1, 14, 10);
+	b_door = App->physics->AddBody(*door, 1.f);
+	
+	pivot = new Cube(1, 1, 1);
+	pivot->SetPos(1, 18, 10);
+	b_pivot = App->physics->AddBody(*pivot, 0.f);
+	//
 
-	
-	
 	b_sphere = App->physics->AddBody(*Big_Sphere, 1000.f);
 	
 	b_sphere->collision_listeners.add(this);
@@ -44,7 +52,13 @@ bool ModuleSceneIntro::Start()
 	CreateMap();
 
 	AddCoin(3, 10, 2);
-	
+
+
+	/////
+
+	App->physics->AddConstraintHinge( *b_pivot, *b_door, {0,0,0 }, { 0,5,0 }, { 1,0,0 }, { 1,0,0 },true);	
+
+	////
 
 	///
 	AddGround(-82, 37, 188, 115, 0);
@@ -85,6 +99,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
+	
 	Plane p(0, 1, 0, 0);
 	//p.axis = true;
 	plane.Render();
@@ -94,6 +109,8 @@ update_status ModuleSceneIntro::Update(float dt)
 		}
 		
 	}
+
+	b_door->body->applyForce({ 0,-100,0 }, {0, 4, 0});
 
 	for (int i = 0; i < ground_vector.Count(); i++) {
 		ground_vector[i].Render();
