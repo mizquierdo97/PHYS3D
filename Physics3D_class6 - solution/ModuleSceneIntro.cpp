@@ -31,16 +31,24 @@ bool ModuleSceneIntro::Start()
 	b_sphere->body->setGravity({ 0,-100,0 });
 
 
-	plane.SetPos(0, -1, 0);
-	plane.Scale(1000, 1, 1000);
+	plane.SetPos(0, 0, 0);
+	plane.Scale(100, 1, 100);
 	plane.color = Black;
 
+	
 	App->physics->AddBody(plane, 0.f);
 
 	CreateMap();
 
 	AddCoin(3, 10, 2);
-	AddGround(00, 37, 20, 115, 0);
+	/*AddGround(00, 37, 20, 115, 0);
+	AddGround(-61,80,30,62,90);
+	AddGround(-143, 80, 30, 62, 90);
+	AddGround(-20, 75, 20, 35, 0);
+	AddGround(-102, 75, 20, 35, 0);
+	AddGround(-35, 37, 70, 20, 90);
+	AddGround(-102, 75, 20, 35, 90);*/
+	AddGround(-82, 37, 188, 115, 0);
 
 	return ret;
 }
@@ -58,7 +66,7 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	Plane p(0, 1, 0, 0);
 	//p.axis = true;
-
+	plane.Render();
 	for (int i = 0; i < Coins.Count(); i++) {
 		if (Coins[i].active == true) {
 			Coins[i].coin->Render();
@@ -130,13 +138,7 @@ void ModuleSceneIntro::AddWall(int x, int z, btScalar width, float rotation) {
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, wall, fallInertia);
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	App->physics->world->addRigidBody(fallRigidBody);
-	/*
-	Cube Wall;
-	Wall.size = vec3(width, 3,0.51);
-	Wall.SetPos(x, y, z);
 
-	walls_vector.PushBack(Wall);
-	*/
 
 	Cube r_wall(width * 2, 6, 1);
 	fallRigidBody->getWorldTransform().getOpenGLMatrix(&r_wall.transform);
@@ -172,14 +174,16 @@ void ModuleSceneIntro::Restart()
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-	for (int i = 0; i < Coins.Count(); i++) {
-		if (body1 == Coins[i].sensor || body2 == Coins[i].sensor) {
-			
-			mat4x4 m;
-			Coins[i].sensor->GetTransform(&m);
-			Coins[i].sensor->SetPos(m[12], m[13]-20, m[14]);
-			Coins[i].active = false;
-			App->player->score += 100;
+	if (body1 == App->player->vehicle || body2 == App->player->vehicle) {
+		for (int i = 0; i < Coins.Count(); i++) {
+			if (body1 == Coins[i].sensor || body2 == Coins[i].sensor) {
+
+				mat4x4 m;
+				Coins[i].sensor->GetTransform(&m);
+				Coins[i].sensor->SetPos(m[12], m[13] - 20, m[14]);
+				Coins[i].active = false;
+				App->player->score += 100;
+			}
 		}
 	}
 	

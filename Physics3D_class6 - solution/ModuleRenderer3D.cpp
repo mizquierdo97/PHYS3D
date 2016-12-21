@@ -1,6 +1,8 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleRenderer3D.h"
+#include "ModulePlayer.h"
+#include "PhysVehicle3D.h"
 #include "SDL\include\SDL_opengl.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -78,7 +80,7 @@ bool ModuleRenderer3D::Init()
 		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, LightModelAmbient);
 		
 		lights[0].ref = GL_LIGHT0;
-		lights[0].ambient.Set(0.25f, 0.25f, 0.25f, 1.0f);
+		lights[0].ambient.Set(0.5f, 0.5f, 0.5f, 1.0f);
 		lights[0].diffuse.Set(0.75f, 0.75f, 0.75f, 1.0f);
 		lights[0].SetPos(0.0f, 0.0f, 2.5f);
 		lights[0].Init();
@@ -112,8 +114,10 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 	glLoadMatrixf(App->camera->GetViewMatrix());
 
 	// light 0 on cam pos
-	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
-
+	//	lights[0].SetPos(App->camera->Position.x, App->camera->Position.y, App->camera->Position.z);
+	mat4x4 m;
+	App->player->vehicle->GetTransform(&m);
+	lights[0].SetPos(m[12] + 13, 50, m[14]);
 	for(uint i = 0; i < MAX_LIGHTS; ++i)
 		lights[i].Render();
 
