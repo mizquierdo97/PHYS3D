@@ -120,7 +120,21 @@ bool ModuleSceneIntro::Start()
 
 	//cuadrado grande 2a parte
 	AddGround(-135, -273, 85, 330, 90);
+	//cuadrado grande final
+	AddGround(38, -126, 145, 220, 0);
 
+	//Rampa final
+	AddGround(36, 15, 27, 8, 0);
+	AddGround(36, 23, 27, 8, 0);
+	AddGround(36, 31, 27, 8, 0);
+	AddGround(36, 39, 27, 8, 0);
+	AddGround(36, 47, 27, 8, 0);
+	AddGround(36, 55, 27, 8, 0);
+	AddGround(36, 63, 27, 8, 0);
+	AddGround(36, 71, 27, 8, 0);
+	AddGround(36, 79, 27, 8, 0);
+	AddGround(36, 87, 27, 8, 0);
+	
 
 	return ret;
 }
