@@ -6,7 +6,7 @@
 #include "PhysBody3D.h"
 #include "Light.h"
 
-#define _TIME_ 120
+#define _TIME_ 90
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
@@ -261,7 +261,7 @@ update_status ModulePlayer::Update(float dt)
 	
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h     %i", vehicle->GetKmh(), score);
+	sprintf_s(title, "Time : %i   Score:  %i       Max Score: %i        %.2f", time, score, max_score, App->player->vehicle->GetKmh());
 	App->window->SetTitle(title);
 
 	

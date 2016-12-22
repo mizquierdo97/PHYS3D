@@ -25,6 +25,23 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 200.0f, -100.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
+
+	slow1 = new Cube(40, 1, 24);
+	slow1->SetPos(-240, 8, 72);
+	slow1->color = Red;
+	
+	slow_sensor1 = App->physics->AddBody(*slow1, 0.f);
+	slow_sensor1->SetAsSensor(true);
+	slow_sensor1->collision_listeners.add(this);
+
+	//
+	Cube* cube_final = new Cube(40, 10, 0.5);
+	cube_final->SetPos(40, 10, 140);
+
+	final_sensor = App->physics->AddBody(*cube_final, 0.f);
+	final_sensor->SetAsSensor(true);
+	final_sensor->collision_listeners.add(this);
+	
 	//Big Sphere
 	Big_Sphere = new Sphere(10);
 	Big_Sphere->SetPos(-23.5, 60, -70);
@@ -91,7 +108,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	
+	slow1->Render();
 	
 	for (int i = 0; i < Coins.Count(); i++) {
 		if (Coins[i].active == true) {
@@ -102,7 +119,7 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	b_sphere->body->applyCentralForce({ 0,0,-100 });
 	//Constrains
-	b_cons_1->body->applyForce({ 0,0,100 }, {0, 20, 0});
+	b_cons_1->body->applyForce({ 0,-100,0}, {0, 20, 0});
 	b_cons_2->body->applyForce({ 0,-100,0 }, { 0, 20, 0 });
 	b_cons_3->body->applyForce({ 0,-100,0 }, { 0, 20, 0 });
 
@@ -239,6 +256,17 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			}
 		}
 	
+		if (body1 == final_sensor || body2 == final_sensor) {
+			if (App->player->max_score < App->player->score) {
+				App->player->max_score = App->player->score;
+			}
+			Restart();
+		}
+		if (body1 == slow_sensor1 || body2 == slow_sensor1) {
+			if (App->player->vehicle->GetKmh() > 30) {
+				App->player->vehicle->body->applyCentralForce({ 10000, 0, 0 });
+			}
+		}
 	}
 	
 	if (body1 == b_sphere || body2 == b_sphere) {
@@ -495,8 +523,6 @@ void ModuleSceneIntro::Walls() {
 	//--------------------------//
 
 	//END
-	AddWall(113 + i, 210 + k, 40, 1);
-	AddWall(140 + i, 210 + k, 40, 1);
 	
 
 	AddWall(67 + i, 60 + k, 20, 2);

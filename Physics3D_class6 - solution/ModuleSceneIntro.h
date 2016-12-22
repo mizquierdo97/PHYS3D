@@ -71,4 +71,14 @@ public:
 	p2DynArray<Cube> ground_vector;
 	PhysBody3D* b_sphere;
 	Sphere* Big_Sphere;
+
+	PhysBody3D* final_sensor;
+
+	PhysBody3D* slow_sensor1;
+	Cube* slow1;
+	PhysBody3D* slow_sensor2;
+	Cube* slow2;
+	PhysBody3D* slow_sensor3;
+	Cube* slow3;
+	
 };
