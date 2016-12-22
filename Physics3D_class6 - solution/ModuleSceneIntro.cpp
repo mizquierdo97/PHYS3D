@@ -572,6 +572,11 @@ void ModuleSceneIntro::Ramps()
 	btRigidBody* fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	App->physics->world->addRigidBody(fallRigidBody);
 
+	Cube c_wall(12*2,15*2,1*2);
+	fallRigidBody->getWorldTransform().getOpenGLMatrix(&c_wall.transform);
+	walls_vector.PushBack(c_wall);
+	
+
 	//UP(U)
 	btCollisionShape* wall1 = new btBoxShape(btVector3({ 12,15,1 }));
 	wall1->calculateLocalInertia(mass, fallInertia);
@@ -580,6 +585,9 @@ void ModuleSceneIntro::Ramps()
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI1(mass, fallMotionState1, wall1, fallInertia);
 	btRigidBody* fallRigidBody1 = new btRigidBody(fallRigidBodyCI1);
 	App->physics->world->addRigidBody(fallRigidBody1);
+	Cube c_wall1(12 * 2, 15 * 2, 1 * 2);
+	fallRigidBody1->getWorldTransform().getOpenGLMatrix(&c_wall1.transform);
+	walls_vector.PushBack(c_wall1);
 
 	// UP(D)
 	btCollisionShape* wall2 = new btBoxShape(btVector3({ 14,15,1 }));
@@ -589,6 +597,9 @@ void ModuleSceneIntro::Ramps()
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI2(mass, fallMotionState2, wall2, fallInertia);
 	btRigidBody* fallRigidBody2 = new btRigidBody(fallRigidBodyCI2);
 	App->physics->world->addRigidBody(fallRigidBody2);
+	Cube c_wall2(14 * 2, 15 * 2, 1 * 2);
+	fallRigidBody2->getWorldTransform().getOpenGLMatrix(&c_wall2.transform);
+	walls_vector.PushBack(c_wall2);
 
 	//UP(U)
 	btCollisionShape* wall3 = new btBoxShape(btVector3({ 14,15,1 }));
@@ -598,6 +609,9 @@ void ModuleSceneIntro::Ramps()
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI3(mass, fallMotionState3, wall3, fallInertia);
 	btRigidBody* fallRigidBody3 = new btRigidBody(fallRigidBodyCI3);
 	App->physics->world->addRigidBody(fallRigidBody3);
+	Cube c_wall3(14 * 2, 15 * 2, 1 * 2);
+	fallRigidBody3->getWorldTransform().getOpenGLMatrix(&c_wall3.transform);
+	walls_vector.PushBack(c_wall3);
 
 	// UP(D)
 	btCollisionShape* wall4 = new btBoxShape(btVector3({ 10,15,1 }));
@@ -607,6 +621,9 @@ void ModuleSceneIntro::Ramps()
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI4(mass, fallMotionState4, wall4, fallInertia);
 	btRigidBody* fallRigidBody4 = new btRigidBody(fallRigidBodyCI4);
 	App->physics->world->addRigidBody(fallRigidBody4);
+	Cube c_wall4(10 * 2, 15 * 2, 1 * 2);
+	fallRigidBody4->getWorldTransform().getOpenGLMatrix(&c_wall4.transform);
+	walls_vector.PushBack(c_wall4);
 
 	//UP(U)
 	btCollisionShape* wall5 = new btBoxShape(btVector3({ 10,15,1 }));
@@ -616,6 +633,9 @@ void ModuleSceneIntro::Ramps()
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI5(mass, fallMotionState5, wall5, fallInertia);
 	btRigidBody* fallRigidBody5 = new btRigidBody(fallRigidBodyCI5);
 	App->physics->world->addRigidBody(fallRigidBody5);
+	Cube c_wall5(10 * 2, 15 * 2, 1 * 2);
+	fallRigidBody5->getWorldTransform().getOpenGLMatrix(&c_wall5.transform);
+	walls_vector.PushBack(c_wall5);
 
 	btCollisionShape* wall6 = new btBoxShape(btVector3({ 20,30,0.5 }));
 	wall6->calculateLocalInertia(mass, fallInertia);
@@ -624,6 +644,8 @@ void ModuleSceneIntro::Ramps()
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI6(mass, fallMotionState6, wall6, fallInertia);
 	btRigidBody* fallRigidBody6 = new btRigidBody(fallRigidBodyCI6);
 	App->physics->world->addRigidBody(fallRigidBody6);
+	
+	
 
 
 }
