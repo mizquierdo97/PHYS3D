@@ -78,7 +78,6 @@ public:
 	Cube* slow1;
 	PhysBody3D* slow_sensor2;
 	Cube* slow2;
-	PhysBody3D* slow_sensor3;
-	Cube* slow3;
+	
 	
 };

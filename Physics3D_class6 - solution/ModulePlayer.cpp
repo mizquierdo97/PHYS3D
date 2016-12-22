@@ -6,7 +6,7 @@
 #include "PhysBody3D.h"
 #include "Light.h"
 
-#define _TIME_ 90
+#define _TIME_ 100
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
@@ -125,7 +125,7 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
 	time = _TIME_ - (SDL_GetTicks() - start_ticks)/1000;
-	LOG("%i", time);
+	
 
 	if (time < 0) {
 		App->scene_intro->Restart();
@@ -261,7 +261,7 @@ update_status ModulePlayer::Update(float dt)
 	
 
 	char title[80];
-	sprintf_s(title, "Time : %i   Score:  %i       Max Score: %i        %.2f", time, score, max_score, App->player->vehicle->GetKmh());
+	sprintf_s(title, "Time : %i   Score:  %i       Max Score: %i    ", time, score, max_score);
 	App->window->SetTitle(title);
 
 	

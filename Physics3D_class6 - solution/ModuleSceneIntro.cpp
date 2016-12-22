@@ -19,9 +19,9 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 	App->audio->Init();
-	App->audio->PlayMusic("Music.ogg");
-	App->audio->LoadFx("Colision2.wav");
-	App->audio->LoadFx("Coin.wav");
+	App->audio->PlayMusic("Game/Music.ogg");
+
+	App->audio->LoadFx("Game/Coin.wav");
 	App->camera->Move(vec3(1.0f, 200.0f, -100.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
@@ -33,6 +33,16 @@ bool ModuleSceneIntro::Start()
 	slow_sensor1 = App->physics->AddBody(*slow1, 0.f);
 	slow_sensor1->SetAsSensor(true);
 	slow_sensor1->collision_listeners.add(this);
+
+	slow2 = new Cube(20, 1, 14);
+	slow2->SetPos(-162, 8, -253);
+	slow2->color = Red;
+
+	slow_sensor2 = App->physics->AddBody(*slow2, 0.f);
+	slow_sensor2->SetAsSensor(true);
+	slow_sensor2->collision_listeners.add(this);
+
+	
 
 	//
 	Cube* cube_final = new Cube(40, 10, 0.5);
@@ -109,7 +119,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 	slow1->Render();
-	
+	slow2->Render();
 	for (int i = 0; i < Coins.Count(); i++) {
 		if (Coins[i].active == true) {
 			Coins[i].coin->Render();
@@ -117,7 +127,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		
 	}
 
-	b_sphere->body->applyCentralForce({ 0,0,-100 });
+	
 	//Constrains
 	b_cons_1->body->applyForce({ 0,-100,0}, {0, 20, 0});
 	b_cons_2->body->applyForce({ 0,-100,0 }, { 0, 20, 0 });
@@ -223,8 +233,6 @@ void ModuleSceneIntro::Restart()
 
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
-	bool is_wall = true;
-	
 	static int cont = 0;
 	if (body1 == App->player->vehicle || body2 == App->player->vehicle) {
 		
@@ -237,8 +245,8 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 				Coins[i].sensor->SetPos(m[12], m[13] - 20, m[14]);
 				Coins[i].active = false;
 				App->player->score += 100;
-				App->audio->PlayFx(2);
-				is_wall = false;
+				App->audio->PlayFx(1);
+				
 			}
 
 		}
@@ -247,26 +255,32 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			b_sphere->body->activate();
 			b_sphere->body->setGravity({ 0,-100,0 });
 			
+			
 		}
-		if (is_wall == true ) {
-			if (App->player->vehicle->GetKmh() > 20) {
-				App->audio->PlayFx(1);
-				is_wall = false;
-				
-			}
-		}
+		
 	
 		if (body1 == final_sensor || body2 == final_sensor) {
 			if (App->player->max_score < App->player->score) {
 				App->player->max_score = App->player->score;
+				
 			}
 			Restart();
 		}
 		if (body1 == slow_sensor1 || body2 == slow_sensor1) {
 			if (App->player->vehicle->GetKmh() > 30) {
 				App->player->vehicle->body->applyCentralForce({ 10000, 0, 0 });
+				
 			}
 		}
+
+		if (body1 == slow_sensor2 || body2 == slow_sensor2) {
+			if (App->player->vehicle->GetKmh() > 30) {
+				App->player->vehicle->body->applyCentralForce({ -10000, 0, 0 });
+				
+			}
+		}
+
+	
 	}
 	
 	if (body1 == b_sphere || body2 == b_sphere) {
@@ -315,11 +329,11 @@ void ModuleSceneIntro::Walls() {
 	AddWall(-225, 59, 50, 0);
 	AddWall(-284, 55, 10, -0.2);
 	AddWall(-309, 35, 25, -0.4);
-
+	
 	AddWall(-255, 83, 50, 0);
 	AddWall(-316, 78, 13, -0.2);
 	AddWall(-337, 61, 19, -0.5);
-
+	
 
 	// -----------------------------//
 	//CURVA RARA
@@ -409,11 +423,11 @@ void ModuleSceneIntro::Walls() {
 
 
 	AddWall(-10, 20, 40, 1);
-	AddWall(-15, 64, 7, -2);
+	AddWall(-14, 65, 7, -2);
 	AddWall(-23, 64, 7, 2);
 	AddWall(-27, 29, 30, 1);
 	AddWall(-33, -9, 10, 2);
-	AddWall(-60, -17, 20, 0);
+	AddWall(-60, -17, 22, 0);
 	AddWall(-87, -9, 10, -2);
 	AddWall(-93, 29, 30, 1);
 
@@ -422,7 +436,7 @@ void ModuleSceneIntro::Walls() {
 	AddWall(-23 - i, 64, 7, 2);
 	AddWall(-27 - i, 29, 30, 1);
 	AddWall(-33 - i, -9, 10, 2);
-	AddWall(-60 - i, -17, 20, 0);
+	AddWall(-60 - i, -17, 22, 0);
 	AddWall(-87 - i, -9, 10, -2);
 	AddWall(-93 - i, 29, 30, 1);
 
@@ -438,7 +452,7 @@ void ModuleSceneIntro::Walls() {
 	AddWall(-101, 74, 5, 1);
 	AddWall(-140, 86, 7, 1);
 
-
+	
 
 
 	/////
@@ -486,9 +500,9 @@ void ModuleSceneIntro::Walls() {
 	//--------------------------//
 	
 	AddWall(99 + i, -74 + k, 20, 1);
-	AddWall(78 + i, -26 + k, 35, -2);
+	AddWall(78 + i, -29 + k, 35, -2);
 	AddWall(92 + i, -18 + k, 25, -2);
-
+	
 	//DCH
 	AddWall(56 + i, 15 + k, 30, 1);
 	AddWall(77 + i, 23 + k, 22, 1);
@@ -496,7 +510,7 @@ void ModuleSceneIntro::Walls() {
 	AddWall(104 + i, 80 + k, 45, 2);
 	AddWall(113 + i, 132 + k, 12, 1);
 	AddWall(140 + i, 134 + k, 10, 1);
-
+	
 
 	//IZQ
 	AddWall(115 + i, -74 + k, 20, 1);
@@ -571,7 +585,7 @@ void ModuleSceneIntro::Coin()
 
 	// Recta
 	AddCoin(-200, 10, 70);
-	AddCoin(-240, 10, 70);
+	
 	AddCoin(-280, 10, 70);
 	AddCoin(-310, 10, 60);
 	AddCoin(-330, 10, 35);
