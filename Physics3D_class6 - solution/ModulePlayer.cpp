@@ -6,6 +6,8 @@
 #include "PhysBody3D.h"
 #include "Light.h"
 
+#define _TIME_ 120
+
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
@@ -20,6 +22,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	VehicleInfo car;
+
 
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(2, 1, 4);
@@ -98,11 +101,13 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 11, -270);
+	vehicle->SetPos(0, 11, -3);
 
 	vehicle->GetTransform(&initial_trans);
 
 	App->camera->Follow(vehicle, 30, 30, 1.f);
+
+	start_ticks = SDL_GetTicks();
 
 	return true;
 }
@@ -119,8 +124,12 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
+	time = _TIME_ - (SDL_GetTicks() - start_ticks)/1000;
+	LOG("%i", time);
 
-
+	if (time < 0) {
+		App->scene_intro->Restart();
+	}
 	btTransform tr;
 	tr.setIdentity();
 	btQuaternion quat = { 0,0,0,0 };

@@ -26,5 +26,9 @@ public:
 	float acceleration;
 	float brake;
 	int score = 0;
+	int max_score = 0;
+	int time = 0;
+	int start_ticks = 0;
 	mat4x4 initial_trans;
+	
 };

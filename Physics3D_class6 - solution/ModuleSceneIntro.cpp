@@ -101,9 +101,9 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	b_sphere->body->applyCentralForce({ 0,0,-100 });
 	//Constrains
-	b_cons_1->body->applyForce({ 0,-100,0 }, {0, 4, 0});
-	b_cons_2->body->applyForce({ 0,-100,0 }, { 0, 4, 0 });
-	b_cons_3->body->applyForce({ 0,-100,0 }, { 0, 4, 0 });
+	b_cons_1->body->applyForce({ 0,100,0 }, {0, 4, 0});
+	b_cons_2->body->applyForce({ 0,100,0 }, { 0, 4, 0 });
+	b_cons_3->body->applyForce({ 0,100,0 }, { 0, 4, 0 });
 
 	mat4x4 m;
 
@@ -154,11 +154,17 @@ void ModuleSceneIntro::Restart()
 {
 	for (int i = 0; i < Coins.Count(); i++) {
 		mat4x4 m;
+		b_sphere->SetPos(-23.5, 60, -70);
+		b_sphere->body->setGravity({ 0, 0, 0 });
+		b_sphere->body->setAngularVelocity({ 0,0,0 });
+		b_sphere->body->setLinearVelocity({ 0,0,0 });
 		App->player->vehicle->body->setAngularVelocity({ 0,0,0 });
 		App->player->vehicle->body->setLinearVelocity({ 0,0,0 });
 		App->player->vehicle->SetTransform(&App->player->initial_trans);
 		App->camera->Move(vec3(0.0f, 20.0f, -20.0f));
 		App->player->score = 0;
+		
+		App->player->start_ticks = SDL_GetTicks();
 		Coins[i].sensor->GetTransform(&m);
 		if (Coins[i].active == false) {
 			Coins[i].sensor->SetPos(m[12], m[13] + 20, m[14]);
@@ -194,8 +200,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 			bb_wall->SetPos(-50, 40, 80);
 			b_sphere->body->activate();
 			b_sphere->body->setGravity({ 0,-100,0 });
-			//b_sphere->SetPos(0, 100, 0);
-			//b_sphere->body->applyCentralForce({ 0,0,-100});
+			
 		}
 		if (is_wall == true ) {
 			if (App->player->vehicle->GetKmh() > 20) {
@@ -207,7 +212,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	
 	}
 	
-	else if (body1 == b_sphere || body2 == b_sphere) {
+	if (body1 == b_sphere || body2 == b_sphere) {
 		if(body1 == App->player->vehicle || body2 == App->player->vehicle) {
 			Restart();
 		}
