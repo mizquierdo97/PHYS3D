@@ -505,7 +505,131 @@ void ModuleSceneIntro::Walls() {
 
 void ModuleSceneIntro::Coin()
 {
-	AddCoin(3, 10, 2);
+	//beggining
+	AddCoin(0, 10, 50);
+	AddCoin(0, 10, 35);
+	AddCoin(0, 10, 20);
+
+	// Zigzag
+	AddCoin(-5, 10, 70);
+	AddCoin(-40, 10, 80);
+	AddCoin(-80, 10, 70);
+	AddCoin(-120, 10, 80);
+	AddCoin(-164, 10, 70);
+
+	// S ||
+	AddCoin(-36, 10, 50);
+	AddCoin(-36, 10, 35);
+	AddCoin(-36, 10, 20);
+
+	AddCoin(-80, 10, 50);
+	AddCoin(-80, 10, 35);
+	AddCoin(-80, 10, 20);
+
+	AddCoin(-120, 10, 50);
+	AddCoin(-120, 10, 35);
+	AddCoin(-120, 10, 20);
+
+	AddCoin(-164, 10, 50);
+	AddCoin(-164, 10, 35);
+	AddCoin(-164, 10, 20);
+
+	// S ==
+	AddCoin(-40, 10, 0);
+	AddCoin(-58, 10, -7);
+	AddCoin(-75, 10, 0);
+
+	AddCoin(-124, 10, 0);
+	AddCoin(-142, 10, -7);
+	AddCoin(-160, 10, 0);
+
+	// Recta
+	AddCoin(-200, 10, 70);
+	AddCoin(-240, 10, 70);
+	AddCoin(-280, 10, 70);
+	AddCoin(-310, 10, 60);
+	AddCoin(-330, 10, 35);
+	AddCoin(-345, 10, 15);
+
+	// 1a Curva rampa
+	AddCoin(-183, 10, 90);
+	AddCoin(-192, 10, 100);
+	AddCoin(-200, 10, 108);
+
+	AddCoin(-245, 10, 135);
+	AddCoin(-260, 10, 132);
+	AddCoin(-267, 10, 120);
+	AddCoin(-267, 10, 105);
+
+	//After 1a rampa
+	AddCoin(-266, 10, 25);
+	AddCoin(-266, 10, 15);
+	AddCoin(-266, 10, 5);
+	AddCoin(-266, 10, -5);
+
+	//Curva seguida 1a curva
+	AddCoin(-305, 10, 142);
+	AddCoin(-334, 10, 125);
+	AddCoin(-345, 10, 95);
+	AddCoin(-355, 10, 65);
+
+	// DEAD END 1
+	AddCoin(-266, 10, -45);
+	AddCoin(-264, 10, -55);
+	AddCoin(-253, 10, -60);
+	AddCoin(-243, 10, -60);
+	AddCoin(-233, 10, -60);
+	AddCoin(-223, 10, -60);
+	AddCoin(-213, 10, -60);
+	AddCoin(-203, 10, -60);
+	AddCoin(-193, 10, -60);
+
+	// ROTONDA
+	AddCoin(-300, 10, -10);//Up
+	AddCoin(-298, 10, -68);//Down
+	AddCoin(-329, 10, -40);//Up
+
+						   //Way end 1st part
+	AddCoin(-330, 10, -85);
+	AddCoin(-315, 10, -117);
+
+	// START 2nd part
+	AddCoin(-300, 10, -225);
+	AddCoin(-300, 10, -238);
+
+	// DEAD END 2
+	AddCoin(-310, 10, -250);
+	AddCoin(-318, 10, -260);
+	AddCoin(-326, 10, -270);
+	AddCoin(-334, 10, -280);
+	AddCoin(-342, 10, -290);
+	AddCoin(-350, 10, -300);
+	AddCoin(-358, 10, -310);
+	AddCoin(-366, 10, -320);
+
+	// 2nd part (== ways)
+	AddCoin(-278, 10, -263);//1
+	AddCoin(-245, 10, -280);//1
+	AddCoin(-90, 10, -280);//2
+	AddCoin(0, 10, -275);//3
+	AddCoin(8, 10, -265);//3
+	AddCoin(16, 10, -255);//3
+
+	AddCoin(17, 10, -237);//3
+	AddCoin(17, 10, -220);//3
+
+						  //1st square
+
+
+						  //2nd square
+
+
+						  //3rd square (long way)
+
+
+						  //3rd square (rock)
+
+
 
 }
 
