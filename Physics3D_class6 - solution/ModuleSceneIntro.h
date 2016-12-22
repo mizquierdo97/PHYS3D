@@ -32,7 +32,7 @@ public:
 	void CreateMap();
 
 	void AddWall(int x, int z, btScalar width, float rot);
-	void AddGround(int x, int z, int width, int height,int angle);
+	void AddGround(int x, int z, int width, int height,int angle, Color color = Black);
 	void AddCoin(int x, int y, int z);
 
 	void Walls();

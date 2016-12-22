@@ -21,6 +21,7 @@ bool ModuleSceneIntro::Start()
 	App->audio->Init();
 	App->audio->PlayMusic("Music.ogg");
 	App->audio->LoadFx("Colision2.wav");
+	App->audio->LoadFx("Coin.wav");
 	App->camera->Move(vec3(1.0f, 200.0f, -100.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
@@ -101,9 +102,9 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	b_sphere->body->applyCentralForce({ 0,0,-100 });
 	//Constrains
-	b_cons_1->body->applyForce({ 0,100,0 }, {0, 4, 0});
-	b_cons_2->body->applyForce({ 0,100,0 }, { 0, 4, 0 });
-	b_cons_3->body->applyForce({ 0,100,0 }, { 0, 4, 0 });
+	b_cons_1->body->applyForce({ 0,0,100 }, {0, 20, 0});
+	b_cons_2->body->applyForce({ 0,-100,0 }, { 0, 20, 0 });
+	b_cons_3->body->applyForce({ 0,-100,0 }, { 0, 20, 0 });
 
 	mat4x4 m;
 
@@ -144,7 +145,25 @@ void ModuleSceneIntro::Render() {
 
 	auto temp = walls_vector[0];
 	for (int i = 0; i < walls_vector.Count(); i++) {
+		static float R = 0;
+		static float c_R = 0;
+		static float G = 1.5;
+		static float c_G = 2;
+		static float B = 4;
+		static float c_B = 4;
 
+		R = R + 0.0001f;
+		c_R = sin(R);
+
+		G = G + 0.0001f;
+		c_G = sin(G);
+
+		B = B + 0.0001f;
+		c_B = sin(B);
+
+
+		Color MyWallColor = Color(c_R, c_G, c_B, 1.f);
+		walls_vector[i].color = MyWallColor;
 		walls_vector[i].Render();
 
 	}
@@ -164,6 +183,16 @@ void ModuleSceneIntro::Restart()
 		App->camera->Move(vec3(0.0f, 20.0f, -20.0f));
 		App->player->score = 0;
 		
+		b_cons_1->body->setLinearVelocity({ 0,0,0 });
+		b_cons_1->body->setAngularVelocity({ 0,0,0 });
+
+		b_cons_2->body->setLinearVelocity({ 0,0,0 });
+		b_cons_2->body->setAngularVelocity({ 0,0,0 });
+
+		b_cons_3->body->setLinearVelocity({ 0,0,0 });
+		b_cons_3->body->setAngularVelocity({ 0,0,0 });
+		
+
 		App->player->start_ticks = SDL_GetTicks();
 		Coins[i].sensor->GetTransform(&m);
 		if (Coins[i].active == false) {
@@ -191,7 +220,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 				Coins[i].sensor->SetPos(m[12], m[13] - 20, m[14]);
 				Coins[i].active = false;
 				App->player->score += 100;
-
+				App->audio->PlayFx(2);
 				is_wall = false;
 			}
 
@@ -483,7 +512,7 @@ void ModuleSceneIntro::Coin()
 void ModuleSceneIntro::Ground()
 {
 	///
-	AddGround(-82, 37, 188, 115, 0);
+	AddGround(-82, 37, 188, 115, 0,Black);
 	AddGround(-240, 71, 130, 23, 0);
 	AddGround(-266, 0, 20, 70, 0);
 
@@ -546,16 +575,23 @@ void ModuleSceneIntro::Ground()
 	AddGround(38, -126, 145, 220, 0);
 
 	//Rampa final
-	AddGround(36, 15, 27, 8, 0);
-	AddGround(36, 23, 27, 8, 0);
-	AddGround(36, 31, 27, 8, 0);
-	AddGround(36, 39, 27, 8, 0);
-	AddGround(36, 47, 27, 8, 0);
-	AddGround(36, 55, 27, 8, 0);
-	AddGround(36, 63, 27, 8, 0);
-	AddGround(36, 71, 27, 8, 0);
-	AddGround(36, 79, 27, 8, 0);
-	AddGround(36, 87, 27, 8, 0);
+	AddGround(36, 15, 27, 8, 0, Final5);
+	AddGround(36, 23, 27, 8, 0, Final6);
+	AddGround(36, 31, 27, 8, 0, Final7);
+	AddGround(36, 39, 27, 8, 0, Final1);
+	AddGround(36, 47, 27, 8, 0, Final2);
+	AddGround(36, 55, 27, 8, 0, Final3);
+	AddGround(36, 63, 27, 8, 0, Final4);
+	AddGround(36, 71, 27, 8, 0, Final5);
+	AddGround(36, 79, 27, 8, 0, Final6);
+	AddGround(36, 87, 27, 8, 0, Final7);
+	AddGround(36, 95, 27, 8, 0, Final1);
+	AddGround(36, 103, 27, 8, 0, Final2);
+	AddGround(36, 111, 27, 8, 0, Final3);
+	AddGround(36, 119, 27, 8, 0, Final4);
+	AddGround(36, 127, 27, 8, 0, Final5);
+	AddGround(36, 135, 27, 8, 0, Final6);
+	AddGround(36, 143, 27, 8, 0, Final7);
 
 }
 
@@ -629,7 +665,7 @@ void ModuleSceneIntro::Ramps()
 	btCollisionShape* wall5 = new btBoxShape(btVector3({ 10,15,1 }));
 	wall3->calculateLocalInertia(mass, fallInertia);
 	btDefaultMotionState* fallMotionState5 =
-		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, -0.7), btVector3(-300, 11, -145)));
+		new btDefaultMotionState(btTransform(btQuaternion(0.5, 0, 0, -0.7), btVector3(-301, 11, -150)));
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI5(mass, fallMotionState5, wall5, fallInertia);
 	btRigidBody* fallRigidBody5 = new btRigidBody(fallRigidBodyCI5);
 	App->physics->world->addRigidBody(fallRigidBody5);
@@ -672,7 +708,7 @@ void ModuleSceneIntro::AddWall(int x, int z, btScalar width, float rotation) {
 
 	fallRigidBody->getWorldTransform().getOpenGLMatrix(&r_wall.transform);
 	btQuaternion q = fallRigidBody->getWorldTransform().getRotation();
-	r_wall.color = Blue;
+	r_wall.color = White;
 
 	PhysBody3D* sensor = App->physics->AddBody(r_wall, 0.f);
 	sensor->collision_listeners.add(this);
@@ -702,12 +738,12 @@ void ModuleSceneIntro::AddCoin(int x, int y, int z) {
 
 }
 
-void ModuleSceneIntro::AddGround(int x, int z, int width, int height, int angle) {
+void ModuleSceneIntro::AddGround(int x, int z, int width, int height, int angle, Color color ) {
 	Cube* ground = new Cube(width, 0.5, height);
 	ground->SetPos(x, 7, z);
 	//ground->Scale(1000, 1, 1000);
 	ground->SetRotation(angle, { 0,1,0 });
-	ground->color = White;
+	ground->color = color;
 
 	PhysBody3D* b_ground = App->physics->AddBody(*ground, 0.f);
 	ground_vector.PushBack(*ground);
