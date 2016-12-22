@@ -645,17 +645,59 @@ void ModuleSceneIntro::Coin()
 	AddCoin(17, 10, -220);//3
 
 						  //1st square
+	AddCoin(-135, 10, -253);
+	AddCoin(-140, 10, -253);
+	AddCoin(-145, 10, -253);
+	AddCoin(-150, 10, -253);
+	AddCoin(-155, 10, -253);
+	//--//
+	AddCoin(-170, 10, -253);
+	AddCoin(-175, 10, -253);
+	AddCoin(-180, 10, -253);
+	AddCoin(-185, 10, -253);
+	AddCoin(-190, 10, -253);
 
+	AddCoin(-160, 10, -308);
+	AddCoin(-165, 10, -308);
 
-						  //2nd square
+	//2nd square
+	AddCoin(-20, 10, -270);
+	AddCoin(-40, 10, -290);
+	AddCoin(-60, 10, -270);
 
+	//3rd square (ROCK)
 
-						  //3rd square (long way)
+	/*AddCoin(5, 10, -193);
+	AddCoin(-2, 10, -185);
+	AddCoin(-9, 10, -175);
+	AddCoin(-17, 10, -165);*/
+	//--||
+	AddCoin(-21, 10, -150);
+	AddCoin(-21, 10, -140);
+	AddCoin(-21, 10, -130);
+	AddCoin(-21, 10, -120);
+	//--//
+	AddCoin(9, 10, -72);
+	AddCoin(2, 10, -82);
+	AddCoin(-5, 10, -92);
+	AddCoin(-13, 10, -100);
 
+	//3rd square (LONG WAY)
+	AddCoin(36, 10, -175);
+	AddCoin(36, 10, -160);
+	AddCoin(42, 10, -138);
+	AddCoin(68, 10, -138);
+	AddCoin(74, 10, -173);
+	AddCoin(74, 10, -158);
+	AddCoin(92, 10, -202);
+	AddCoin(102, 10, -173);
+	AddCoin(102, 10, -155);
+	AddCoin(102, 10, -137);
 
-						  //3rd square (rock)
-
-
+	AddCoin(5 + 87, 10, -102);
+	AddCoin(-2 + 87, 10, -94);
+	AddCoin(-9 + 87, 10, -84);
+	AddCoin(-17 + 87, 10, -74);
 
 }
 
